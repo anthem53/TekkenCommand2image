@@ -12,4 +12,5 @@ https://anthem53.github.io/TekkenCommand2image/
 
 # TODO 
 - 세이브 파일 지울 수 있도록 버튼 추가 
-   
+- 평문에 숫자 포함되는 경우 처리할 수 있도록 하기.
+- x2으로 같은 단어 n번 반복하도록 처리하는거
