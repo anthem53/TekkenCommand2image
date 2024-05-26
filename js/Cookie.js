@@ -1,18 +1,32 @@
 const COOKIE_NAME = "RecentCommand"
 const MAX_COOKIE_NUM = 10
 
+
+/**
+ * 입력한 커맨드를 읽어와 원문 그대로 반환하는 함수
+ * @returns 
+ */
 function getCommandInput(){
     const commandInput = document.getElementById("commandInput")
     return commandInput.value
 }
 
+
+/**
+ * 쿠키 정보를 읽어 커맨드 입력창에 그대로 넣어주는 함수
+ * \n는 개행 특수문자인데, 해당 문자 있으면 쿠키가 정상적으로 등록 안되어 <br>로 변환하여 저장했음.
+ * 이를 다시 \n으로 돌려주면서 넣어줌.
+ * @param {*} contents 
+ */
 function setCommandInput(contents){
     const commandInput = document.getElementById("commandInput")
     contents = contents.replaceAll("<br>","\n")    
     commandInput.value = contents;
 
 }
-
+/**
+ * Current Cookie option
+ */
 const COOKIE_OPTION = {
     "expires" : 86400e3+Date.now(),
     "secure" : true,
@@ -21,11 +35,15 @@ const COOKIE_OPTION = {
 }
 
 
-function mapNameValue(name,value){
-    return name + "="+value
-}
+/**
+ * 쿠키 이름과 쿠키 값을 입력받아 실제로 쿠키를 저장하는 함수
+ * 해당 쿠키는 secure로 HTTPS에만 돌아가도록 설정했음.
+ * 그외 설정은 COOKIE_OPTION에 설정한 option을 따름.
+ * @param {*} name 
+ * @param {*} value 
+ */
 function createCookie(name,value){
-    let cookieCotent = mapNameValue(name,value)
+    let cookieCotent = name +"=" + value
         +"; expires=" + new Date(COOKIE_OPTION.expires)
         +"; secure"
         +"; path=" + COOKIE_OPTION.path
@@ -80,10 +98,22 @@ function getCookieList(){
 
 
 }
+
+/**
+ * lastest Number의 값을 얻어와 그 다음 값을 내보냄.
+ * 최대값 넘어가면 1 반환하도록 설정.
+ * @param {int} num 
+ * @returns 
+ */
 function getNextCookieNumber(num){
     return (num + 1) % MAX_COOKIE_NUM
 }
 
+
+/**
+ * 쿠키 값 입력 받아서 다음 쿠키 이름 결정후 쿠키 생성.
+ * @param {String} cookieValue 
+ */
 function setCookie(cookieValue){
 
     cookieValue = cookieValue.replaceAll("\n","<br>")
@@ -106,14 +136,16 @@ function setCookie(cookieValue){
         nextCookieName = COOKIE_NAME+"_"+String(getNextCookieNumber(lastestNum))
     }
 
-    //let nextCookieName = COOKIE_NAME+"_"+String(getNextCookieNumber(cookieListInfo[2]))
-
     createCookie(nextCookieName,cookieValue)
 }
 
 
+/**
+ * 현재는 사용하지 않는 함수.
+ * 첫번째 쿠키를 읽어 커맨드 입력창에 값을 불러옴.
+ */
 function setRecentCommand(){
-    // [result,oldestName,lastestNum]
+    // [result,oldestName,lastestNum, count]
     const cookieListInfo = getCookieList()
     let cookieList = cookieListInfo[0]
     let oldestName = cookieListInfo[1]
@@ -122,12 +154,18 @@ function setRecentCommand(){
 
     
     if (count > 0){
-        setCommandInput(cookieList[0][2])
+        setCommandInput(cookieList[0][0][2])
     }
     else{;}
 
 }
 
+
+/**
+ * 입력 받은 쿠키 번호를 가진 쿠키의 정보를 커맨드 입력창에 불러옴.
+ * @param {Integer} Num 
+ * @returns 
+ */
 function setRecentCommandByNum(Num){
     // [result,oldestName,lastestNum]
     const cookieList= getCookieList()[0]
@@ -147,60 +185,5 @@ function setRecentCommandByNum(Num){
 
 
 
-
-
-function setRecentCommandHistory(){
-    // [result,oldestName,lastestNum]
-
-    const cookieListInfo = getCookieList()
-    let cookieList = cookieListInfo[0]
-    let oldestName = cookieListInfo[1]
-    let lastestNum = cookieListInfo[2]
-    let count = cookieListInfo[3]
-
-    const commandHistoryList = document.getElementById("commandHistoryList");
-    //const commandHistoryList = document.getElementById("offcanvasHistory");
-    print(commandHistoryList.childNodes)
-    commandHistoryList.innerHTML = "";
-
-    if (count == 0){
-        let tempBtn = document.createElement("button")
-        tempBtn.type= "button"
-        tempBtn.className = "list-group-item list-group-item-action"
-        tempBtn.innerHTML = "최근 작성한 커맨드 목록이 없습니다."
-        tempBtn.disabled = true;
-        commandHistoryList.appendChild(tempBtn)
-    }
-    else{
-        let rowNum = 1
-        for (let i = cookieList.length -1 ; i >= 0  ; i--){
-            // [name, number, value] 
-            const cookie = cookieList[i]
-            let cookieValue = cookie[2]
-
-            let historyRow = document.createElement("div")
-            historyRow.className= "d-flex flex-row mb-3"
-
-            let numberLabel = document.createElement("button")
-            numberLabel.type= "button"
-            numberLabel.className = "btn btn-primary me-2"
-            numberLabel.innerHTML = rowNum
-            numberLabel.onclick = function(){ setCommandInput(cookieValue)}
-            historyRow.appendChild(numberLabel)
-            //<button type="button" class="list-group-item list-group-item-action">A second button item</button>
-            let tempBtn = document.createElement("button")
-            tempBtn.type= "button"
-            tempBtn.className = "list-group-item list-group-item-action"
-            tempBtn.innerHTML = cookieValue
-            tempBtn.onclick = function(){ setCommandInput(cookieValue)}
-            historyRow.appendChild(tempBtn)
-            commandHistoryList.appendChild(historyRow)
-            rowNum += 1
-        }
-
-    }
-
-    
-}
 
 

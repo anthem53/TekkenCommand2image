@@ -140,3 +140,67 @@ function executeDraw(commmandParaResult){
         }
     }
 }
+
+
+/**
+ * Cookie를 읽어와서 Cookie History에 표현시켜주는 함수.
+ * 
+ * return X
+ */
+function setRecentCommandHistory(){
+    // [result,oldestName,lastestNum]
+
+    const cookieListInfo = getCookieList()
+    let cookieList = cookieListInfo[0]
+    let oldestName = cookieListInfo[1]
+    let lastestNum = cookieListInfo[2]
+    let count = cookieListInfo[3]
+
+    const commandHistoryList = document.getElementById("commandHistoryList");
+    //const commandHistoryList = document.getElementById("offcanvasHistory");
+    print(commandHistoryList.childNodes)
+    commandHistoryList.innerHTML = "";
+
+    if (count == 0){
+        let tempBtn = document.createElement("button")
+        tempBtn.type= "button"
+        tempBtn.className = "list-group-item list-group-item-action"
+        tempBtn.innerHTML = "최근 작성한 커맨드 목록이 없습니다."
+        tempBtn.disabled = true;
+        commandHistoryList.appendChild(tempBtn)
+    }
+    else{
+        let rowNum = 1
+        for (let i = cookieList.length -1 ; i >= 0  ; i--){
+            // [name, number, value] 
+            const cookie = cookieList[i]
+            let cookieValue = cookie[2]
+
+            let historyRow = document.createElement("div")
+            historyRow.className= "d-flex flex-row mb-3"
+
+            let numberLabel = document.createElement("button")
+            numberLabel.type= "button"
+            numberLabel.className = "btn btn-primary me-2"
+            numberLabel.innerHTML = rowNum
+            numberLabel.onclick = function(){ setCommandInput(cookieValue)}
+            historyRow.appendChild(numberLabel)
+            //<button type="button" class="list-group-item list-group-item-action">A second button item</button>
+            let tempBtn = document.createElement("button")
+            tempBtn.type= "button"
+            tempBtn.className = "list-group-item list-group-item-action"
+            tempBtn.innerHTML = cookieValue
+            tempBtn.onclick = function(){ setCommandInput(cookieValue)}
+            historyRow.appendChild(tempBtn)
+            commandHistoryList.appendChild(historyRow)
+            rowNum += 1
+        }
+
+    }
+}
+
+
+
+
+
+

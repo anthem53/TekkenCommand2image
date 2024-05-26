@@ -24,7 +24,16 @@ let main = {
 
 }
 
+let view = {
+    init : function (){
 
+        this.modelInit();
+    }
+    , modelInit : function (){
+        print("TEST modelInit")
+    }
+}
 
 
 main.init();
+view.init();

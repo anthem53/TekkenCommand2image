@@ -3,6 +3,8 @@ const ElemType = getElemType()
 
 const arrowTable = getArrowTable()
 
+const blackArrowTable = getBlackArrowTable()
+
 const buttonTable = getButton2BitTable()
 
 const symbolTable = getSymbolTable()
@@ -59,10 +61,21 @@ function processWord (word){
 
     while(i < wordLen){
         if (word[i] in arrowTable){ //word.slice(i,i+1)
-            plainTextList = pushPlainTextList(plainTextList,wordResult)
-            
-            wordResult.push([arrowTable[word[i]],ElemType.FILE])
-            i += 1
+            const blackArrowReserve  = word.slice(i,i+2)
+            if (blackArrowReserve in blackArrowTable){
+                
+                plainTextList = pushPlainTextList(plainTextList,wordResult)
+                wordResult.push([blackArrowTable[blackArrowReserve],ElemType.FILE])
+                i += 2
+            }
+            else{
+                plainTextList = pushPlainTextList(plainTextList,wordResult)
+                wordResult.push([arrowTable[word[i]],ElemType.FILE])
+                i += 1
+
+            }
+
+
         }
         else if (word[i] in symbolTable){
             plainTextList = pushPlainTextList(plainTextList,wordResult)

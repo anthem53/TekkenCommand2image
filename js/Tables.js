@@ -16,11 +16,33 @@ const _arrowTable = {
 }
 
 /**
+ * @see 검은 방향키 이미지 주소가 담긴 테이블
+ * @see 검은 방향키는 해당 방향키를 꾹 누른다는 뜻.
+ * @see commandProcess.js에서 사용
+ */
+const _blackArrowTable = {
+    "1~":"images/b1.png",
+    "2~":"images/b2.png",
+    "3~":"images/b3.png",
+    "4~":"images/b4.png",
+    N   :"images/b5.png",
+    "5~":"images/b5.png",
+    "6~":"images/b6.png",
+    "7~":"images/b7.png",
+    "8~":"images/b8.png",
+    "9~":"images/b9.png",
+}
+
+/**
  * CommandProcess.js
  * @returns Object of 방향키 - 방향키 이미지 주소
  */
 function getArrowTable(){
     return _arrowTable;
+}
+
+function getBlackArrowTable(){
+    return _blackArrowTable
 }
 
 
