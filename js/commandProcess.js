@@ -45,6 +45,9 @@ function prepareCommandpara(para){
 }
 
 
+
+
+
 /**
  * word를 처리하여 반환함.
  * @param {*} word 
@@ -58,14 +61,49 @@ function processWord (word){
 
     let i = 0
     let plainTextList = []
+    let plainTextFlag = false
 
     while(i < wordLen){
+
+        /**
+         * "" 으로 감싸진 평문 flag를 먼저 처리하고 진행함.
+         * flag x 시 그냥 진행
+         * flag o 시 입력 받는 모든 정보를 평문으로 넣음.
+         */
+        if (word[i] == "\""){
+            if (plainTextFlag == false){
+                plainTextFlag = true
+                
+            }
+            else{
+                plainTextList = pushPlainTextList(plainTextList,wordResult)
+                plainTextFlag= false
+            }
+            i += 1
+            continue
+        }
+        else{
+            if (plainTextFlag == true){
+                plainTextList.push(word[i])
+                i += 1
+                continue
+            }
+            else{;}
+        }
+
+
+
+
         if (word[i] in arrowTable){ //word.slice(i,i+1)
-            const blackArrowReserve  = word.slice(i,i+2)
-            if (blackArrowReserve in blackArrowTable){
+            const symbolArrow  = word.slice(i,i+2)
+            if (symbolArrow in blackArrowTable){
                 
                 plainTextList = pushPlainTextList(plainTextList,wordResult)
-                wordResult.push([blackArrowTable[blackArrowReserve],ElemType.FILE])
+                wordResult.push([blackArrowTable[symbolArrow],ElemType.FILE])
+                i += 2
+            }
+            else if (symbolArrow[1] == "."){
+                plainTextList.push(symbolArrow[0])
                 i += 2
             }
             else{
@@ -74,7 +112,6 @@ function processWord (word){
                 i += 1
 
             }
-
 
         }
         else if (word[i] in symbolTable){
@@ -114,28 +151,27 @@ function processWord (word){
                     plainTextList.push(word[i])
                 }
                 else{
-                    ;//wordResult.push([word[i],ElemType.BLANK])
+                    ;
                 }
                 
             }
-            else{;}
+            else{}
             i += 1
         }
         else{ 
             plainTextList.push(word[i])
             i += 1
-
         }
     }
 
-    plainTextList = pushPlainTextList(plainTextList,wordResult)
+    pushPlainTextList(plainTextList,wordResult)
     return wordResult
 }
 
 
 /**
  * 
- * @param {*} line 
+ * @param {String} line 
  */
 function processCommandLine(line){
     

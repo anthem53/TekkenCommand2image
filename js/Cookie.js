@@ -18,7 +18,7 @@ function getCommandInput(){
  * 이를 다시 \n으로 돌려주면서 넣어줌.
  * @param {*} contents 
  */
-function setCommandInput(contents){
+function setCommandInputFromCookie(contents){
     const commandInput = document.getElementById("commandInput")
     contents = contents.replaceAll("<br>","\n")    
     commandInput.value = contents;
@@ -140,25 +140,7 @@ function setCookie(cookieValue){
 }
 
 
-/**
- * 현재는 사용하지 않는 함수.
- * 첫번째 쿠키를 읽어 커맨드 입력창에 값을 불러옴.
- */
-function setRecentCommand(){
-    // [result,oldestName,lastestNum, count]
-    const cookieListInfo = getCookieList()
-    let cookieList = cookieListInfo[0]
-    let oldestName = cookieListInfo[1]
-    let lastestNum = cookieListInfo[2]
-    let count = cookieListInfo[3]
 
-    
-    if (count > 0){
-        setCommandInput(cookieList[0][0][2])
-    }
-    else{;}
-
-}
 
 
 /**
@@ -177,7 +159,7 @@ function setRecentCommandByNum(Num){
         let cookieValue = cookie[2]
         if (cookieNum == Num){
             
-            setCommandInput(cookieValue)
+            setCommandInputFromCookie(cookieValue)
             return
         }
     }
