@@ -13,3 +13,4 @@ https://anthem53.github.io/TekkenCommand2image/
 # TODO 
 - x2으로 같은 단어 n번 반복하도록 처리하는거
 - 실시간 번역기능 추가
+- Github 위키에 사용법 추가 및 공유
