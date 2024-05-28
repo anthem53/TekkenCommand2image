@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Freesentation-9Black';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+
 
 .misc_button {
     color: seashell;
@@ -16,4 +24,10 @@
 
 .guide_title{
   font-weight: bolder;
+}
+
+.symbol{
+  font-weight: bolder;
+  font-size: 1.7em;
+  font-family: "Freesentation-9Black";
 }

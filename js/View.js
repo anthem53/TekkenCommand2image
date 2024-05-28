@@ -86,7 +86,7 @@ function drawImage(curResultId, curCommandLine){
             let child = undefined    
             if (type == getElemType().SYMBOL){
                 child = document.createElement('span');
-                child.className = "mx-2 h5"
+                child.className = "symbol mx-2 h5"
                 child.style="color:black"
                 child.innerText = content
             }
