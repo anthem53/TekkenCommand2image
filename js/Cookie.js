@@ -4,7 +4,7 @@ const MAX_COOKIE_NUM = 10
 
 /**
  * 입력한 커맨드를 읽어와 원문 그대로 반환하는 함수
- * @returns 
+ * @returns {String}
  */
 function getCommandInput(){
     const commandInput = document.getElementById("commandInput")
@@ -26,6 +26,7 @@ function setCommandInputFromCookie(contents){
 }
 /**
  * Current Cookie option
+ * 
  */
 const COOKIE_OPTION = {
     "expires" : 86400e3+Date.now(),
@@ -39,8 +40,8 @@ const COOKIE_OPTION = {
  * 쿠키 이름과 쿠키 값을 입력받아 실제로 쿠키를 저장하는 함수
  * 해당 쿠키는 secure로 HTTPS에만 돌아가도록 설정했음.
  * 그외 설정은 COOKIE_OPTION에 설정한 option을 따름.
- * @param {*} name 
- * @param {*} value 
+ * @param {String} name 
+ * @param {String} value 
  */
 function createCookie(name,value){
     let cookieCotent = name +"=" + value
@@ -109,38 +110,76 @@ function getNextCookieNumber(num){
     return (num + 1) % MAX_COOKIE_NUM
 }
 
+/**
+ * 
+ * @param {String} newCookieValue 
+ * @returns [boolean, int]
+ * @see return 의미는 [기존 쿠키에 존재하는지 유무, 해당 쿠키의 숫자]
+ */
+function isCookieExist(newCookieValue){
+    //[result,oldestName,lastestNum,count]
+    let cookieListInfo = getCookieList();
+    let cookieList = cookieListInfo[0]
+    let oldestName = cookieListInfo[1]
+    let lastestNum = cookieListInfo[2]
+    let cookieCount = cookieListInfo[3]
+    
+    for (var i = 0 ; i < cookieCount ; i++){
+        //result.push([name,cookieNum,value])
+        let cookieElem = cookieList[i]
+        const cookieName = cookieElem[0]
+        const cookieNum = cookieElem[1]
+        const cookieValue = cookieElem[2]
+
+        if (cookieValue == newCookieValue){
+            return [true, cookieNum]
+        }
+
+    }
+
+    return [false, -1]
+}
 
 /**
  * 쿠키 값 입력 받아서 다음 쿠키 이름 결정후 쿠키 생성.
  * @param {String} cookieValue 
  */
 function setCookie(cookieValue){
-
+    
     cookieValue = cookieValue.replaceAll("\n","<br>")
+    const isExistResult = isCookieExist(cookieValue)
+    const isExist = isExistResult[0]
+    const targetCookieNum = isExistResult[1]
 
-    //[result,oldestName,lastestNum,count]
-    let cookieListInfo = getCookieList();
-    let cookieList = cookieListInfo[0]
-    let oldestName = cookieListInfo[1]
-    let lastestNum = cookieListInfo[2]
-    let count = cookieListInfo[3]
-    let nextCookieName ;
-
-    if ( count == MAX_COOKIE_NUM){
-        nextCookieName = oldestName
-    }
-    else if (count == 0){
-        nextCookieName = COOKIE_NAME + "_0"
+    if (isExist == true){
+        const nextCookieName = COOKIE_NAME + "_"+targetCookieNum
+        deleteCookieByNum(targetCookieNum)
+        createCookie(nextCookieName,cookieValue)
     }
     else{
-        nextCookieName = COOKIE_NAME+"_"+String(getNextCookieNumber(lastestNum))
+        //[result,oldestName,lastestNum,count]
+        let cookieListInfo = getCookieList();
+        let cookieList = cookieListInfo[0]
+        let oldestName = cookieListInfo[1]
+        let lastestNum = cookieListInfo[2]
+        let count = cookieListInfo[3]
+        let nextCookieName ;
+
+        if ( count == MAX_COOKIE_NUM){
+            nextCookieName = oldestName
+        }
+        else if (count == 0){
+            nextCookieName = COOKIE_NAME + "_0"
+        }
+        else{
+            nextCookieName = COOKIE_NAME+"_"+String(getNextCookieNumber(lastestNum))
+        }
+
+        createCookie(nextCookieName,cookieValue)
     }
 
-    createCookie(nextCookieName,cookieValue)
+    
 }
-
-
-
 
 
 /**
@@ -165,14 +204,19 @@ function setRecentCommandByNum(Num){
     }
 }
 
+
+/**
+ * 쿠키의 번호를 입력받아 해당 쿠키를 삭제함.
+ * @param {int} cookieNum 
+ */
 function deleteCookieByNum(cookieNum){
 
     let cookieName = COOKIE_NAME+"_"+cookieNum
 
-    print(cookieName)
     document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/"
     
 }
+
 
 
 
