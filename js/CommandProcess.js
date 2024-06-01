@@ -209,7 +209,8 @@ function processCommandPara(){
     let commandLineList = prepareCommandpara(commandInputContent)
     let resultList = []
     for (const commandLineIndex in commandLineList){
-        const commandLine = commandLineList[commandLineIndex]
+        let commandLine = commandLineList[commandLineIndex]
+        commandLine = commandLine.trim()
         if (commandLine != ""){
             let lineResult = processCommandLine(commandLine) 
             resultList.push([lineResult,commandLine])
