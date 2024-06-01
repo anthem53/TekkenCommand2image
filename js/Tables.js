@@ -133,3 +133,29 @@ function getSymbolTable(){
     return _symbolTable
 }
 
+
+
+const _HISTORY_COOKIE_OPTION = {
+    "expires" : 86400e3+Date.now(),
+    "secure" : true,
+    "SameSite" : "Strict",
+    "path" : "/"
+}
+
+function getHistoryCookieOption (){
+
+    return _HISTORY_COOKIE_OPTION
+}
+
+const _OPTION_COOKIE_OPTION = {
+    "expires" : (86400e3*30) +Date.now(),
+    "secure" : true,
+    "SameSite" : "Strict",
+    "path" : "/"
+}
+
+
+function getOptionCookieOption (){
+
+    return _OPTION_COOKIE_OPTION
+}

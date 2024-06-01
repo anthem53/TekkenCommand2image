@@ -9,6 +9,13 @@ let main = {
         offcanvasHistory.addEventListener("show.bs.offcanvas", function (){
             setRecentCommandHistory()
         })
+
+        offcanvasHistory.addEventListener("hidden.bs.offcanvas", function (){
+            const commandParaResult = processCommandPara();
+            executeDraw(commandParaResult)
+        })
+
+        _this.test()
     } 
     , execute : function (){
         const commandParaResult = processCommandPara();
@@ -16,6 +23,17 @@ let main = {
     }
     , commandHistory : function (){
         //setRecentCommandHistory()
+    }
+    , test : function (){
+        window.addEventListener("keyup", e => {
+            //const commandParaResult = processCommandPara();
+            //executeDraw(commandParaResult)
+        });
+
+        window.addEventListener("mouseup", e =>{
+            //const commandParaResult = processCommandPara();
+            //executeDraw(commandParaResult)
+        })
     }
 
 }

@@ -28,27 +28,25 @@ function setCommandInputFromCookie(contents){
  * Current Cookie option
  * 
  */
-const COOKIE_OPTION = {
-    "expires" : 86400e3+Date.now(),
-    "secure" : true,
-    "SameSite" : "Strict",
-    "path" : "/"
-}
+const HISTORY_COOKIE_OPTION = getHistoryCookieOption()
+const OPTION_COOKIE_OPTION = getOptionCookieOption()
 
 
 /**
  * 쿠키 이름과 쿠키 값을 입력받아 실제로 쿠키를 저장하는 함수
  * 해당 쿠키는 secure로 HTTPS에만 돌아가도록 설정했음.
  * 그외 설정은 COOKIE_OPTION에 설정한 option을 따름.
- * @param {String} name 
- * @param {String} value 
+ * @param {string} name 
+ * @param {string} value 
+ * @param {Object} cookieOption 
  */
-function createCookie(name,value){
+function createCookie(name,value,cookieOption){
+        
     let cookieCotent = name +"=" + value
-        +"; expires=" + new Date(COOKIE_OPTION.expires)
+        +"; expires=" + new Date(cookieOption.expires)
         +"; secure"
-        +"; path=" + COOKIE_OPTION.path
-        +"; Samesite=" + COOKIE_OPTION.SameSite
+        +"; path=" + cookieOption.path
+        +"; Samesite=" + cookieOption.SameSite
         +";"
 
     //print(cookieCotent)
@@ -154,7 +152,7 @@ function setCookie(cookieValue){
     if (isExist == true){
         const nextCookieName = COOKIE_NAME + "_"+targetCookieNum
         deleteCookieByNum(targetCookieNum)
-        createCookie(nextCookieName,cookieValue)
+        createCookie(nextCookieName,cookieValue , HISTORY_COOKIE_OPTION)
     }
     else{
         //[result,oldestName,lastestNum,count]
@@ -175,7 +173,7 @@ function setCookie(cookieValue){
             nextCookieName = COOKIE_NAME+"_"+String(getNextCookieNumber(lastestNum))
         }
 
-        createCookie(nextCookieName,cookieValue)
+        createCookie(nextCookieName,cookieValue, HISTORY_COOKIE_OPTION)
     }
 
     
