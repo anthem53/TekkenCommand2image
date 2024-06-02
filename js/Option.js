@@ -12,15 +12,13 @@ function getIsLive(){
 
 function setIsLive(optionValue){
     let isLiveOption = document.querySelector('input[name="liveTranslate"]')
-    print(isLiveOption)
-    if (optionValue == "false"){
-        
-
+    
+    if (optionValue == true){
+        $('input[name=liveTranslate]:input[value="true"]').attr("checked", true);	// 선택	
     }
     else{
-
+        $('input[name=liveTranslate]:input[value="false"]').attr("checked", true);	// 선택	
     }
 
 }
 
-setIsLive(true)

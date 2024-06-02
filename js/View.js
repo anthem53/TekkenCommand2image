@@ -192,6 +192,7 @@ function setRecentCommandHistory(){
         for (let i = cookieList.length -1 ; i >= 0  ; i--){
             // [name, number, value] 
             const cookie = cookieList[i]
+            let cookieName = cookie[0]
             let cookieNum = cookie[1]
             let cookieValue = cookie[2]
 
@@ -220,7 +221,7 @@ function setRecentCommandHistory(){
             print(cookieNum)
             removeButton.onclick = function (){
                 deleteCookieRow(cookieNum)
-                deleteCookieByNum(cookieNum)
+                deleteCookieByName(cookieName)
             }
             
             

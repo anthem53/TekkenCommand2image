@@ -3,16 +3,6 @@ const MAX_COOKIE_NUM = 10
 
 
 /**
- * 입력한 커맨드를 읽어와 원문 그대로 반환하는 함수
- * @returns {String}
- */
-function getCommandInput(){
-    const commandInput = document.getElementById("commandInput")
-    return commandInput.value
-}
-
-
-/**
  * 쿠키 정보를 읽어 커맨드 입력창에 그대로 넣어주는 함수
  * \n는 개행 특수문자인데, 해당 문자 있으면 쿠키가 정상적으로 등록 안되어 <br>로 변환하여 저장했음.
  * 이를 다시 \n으로 돌려주면서 넣어줌.
@@ -151,7 +141,7 @@ function setCookie(cookieValue){
 
     if (isExist == true){
         const nextCookieName = COOKIE_NAME + "_"+targetCookieNum
-        deleteCookieByNum(targetCookieNum)
+        deleteCookieByName(nextCookieName)
         createCookie(nextCookieName,cookieValue , HISTORY_COOKIE_OPTION)
     }
     else{
@@ -203,18 +193,29 @@ function setRecentCommandByNum(Num){
 }
 
 
+
+
+
+/**
+ * 쿠키 이름을 입력받으면 해당 쿠키를 제거함.
+ * @param {String} cookieName 
+ */
+function deleteCookieByName(cookieName){
+    document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/"
+}
+
+
 /**
  * 쿠키의 번호를 입력받아 해당 쿠키를 삭제함.
  * @param {int} cookieNum 
  */
-function deleteCookieByNum(cookieNum){
+function deleteCookieByNum(cookieBaseName, cookieNum){
 
-    let cookieName = COOKIE_NAME+"_"+cookieNum
+    let cookieName = cookieBaseName+"_"+cookieNum
 
-    document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/"
+    deleteCookieByName(cookieName)
     
 }
-
 
 
 
