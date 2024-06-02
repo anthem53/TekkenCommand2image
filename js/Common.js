@@ -19,6 +19,14 @@ function isDebug(){
 }
 
 function print(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
+    
+    for (let i = 0 ; i < arguments.length ; i++){
+        console.log(arguments[i])
+    }
+
+}
+
+function prints(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
     let result = ""
 
     for (let i = 0 ; i < 9 ; i++){
