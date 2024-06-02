@@ -1,3 +1,5 @@
+const symbolStyleTable = getSymbolStyleTable()
+
 function clearAllImage(){
     let resultList = document.getElementById("resultList");
 
@@ -86,9 +88,10 @@ function drawImage(curResultId, curCommandLine){
             let child = undefined    
             if (type == getElemType().SYMBOL){
                 child = document.createElement('span');
-                child.className = "symbol mx-2 h5"
+                child.className = "symbol_base mx-1" + symbolStyleTable[content]
                 child.style="color:black"
                 child.innerText = content
+                
             }
             else if (type == getElemType().FILE){
                 child = document.createElement('img');
@@ -178,8 +181,6 @@ function setRecentCommandHistory(){
     let count = cookieListInfo[3]
 
     const commandHistoryList = document.getElementById("commandHistoryList");
-    //const commandHistoryList = document.getElementById("offcanvasHistory");
-    print(commandHistoryList.childNodes)
     commandHistoryList.innerHTML = "";
 
     if (count == 0){
@@ -231,7 +232,6 @@ function setRecentCommandHistory(){
 
     }
 }
-
 
 
 

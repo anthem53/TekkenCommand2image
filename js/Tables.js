@@ -106,33 +106,35 @@ function getBit2FileTable(){
 }
 
 
-
-let _symbolTable = {}
-
 /**
- * @see 별다른 처리 없이 그대로 내보낼 symbol값을 삽입
- * @see 구현상 ▶는 해당 리스트에서 찾지는 않지만 symbol이므로 넣음. 
+ * 심볼 테이블.
+ * 원래 추가하는 방식이었는데 심볼마다 적용할 style이 달라져서 그냥 고정값으로 분리
+ * 새로운 Symbole 추가할 일 생기면 봐야할 곳
+ * _symbolTable in Table.js
+ * _symbolStyleTable in Table.js
+ * Symbol_Style in tekkenCommand.css 
  */
-const _symbolList = ['[',']','~','▶']
-
-
-/**
- * @see 추후 symbol 이 추가될 경우를 대비하여 업데이트 해줌.
- */
-function initSymbolTable (symbols){
-
-    for (const symbolIndex in symbols){
-        const symbol = symbols[symbolIndex]
-        _symbolTable[symbol] =  symbol
-    }
-
+let _symbolTable = {
+    '[':'[',
+    ']':']',
+    '~':'~',
+    '▶':'▶'
 }
-initSymbolTable(_symbolList)
 
 function getSymbolTable(){
     return _symbolTable
 }
 
+let _symbolStyleTable = {
+    '[':' symbol_bracket ',
+    ']':' symbol_bracket ',
+    '~':' symbol_tilde ',
+    '▶':' symbol_trangle mx-2'
+}
+
+function getSymbolStyleTable () {
+    return _symbolStyleTable
+}
 
 
 const _HISTORY_COOKIE_OPTION = {

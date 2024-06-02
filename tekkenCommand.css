@@ -26,8 +26,22 @@
   font-weight: bolder;
 }
 
-.symbol{
-  font-weight: bolder;
-  font-size: 1.7em;
+.symbol_base{
   font-family: "Freesentation-9Black";
+  vertical-align : middle;
+}
+
+.symbol_bracket{
+  font-size: 2.5em;
+}
+
+.symbol_trangle{
+  font-size: 1.7em;
+}
+
+.symbol_tilde {
+  font-size: 1.7em;
+}
+.symbol_else{
+  font-size: 1.7em;
 }
