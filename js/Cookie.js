@@ -51,7 +51,7 @@ function createCookie(name,value,cookieOption){
  * lastestNum은 가장 최근 쿠키의 넘버링
  * cookiecount는 저장된 쿠키 개수
  */
-function getCookieList(){
+function getHistoryCookieList(){
     let cookieOrigin = document.cookie
     let result = []
     let oldestName = undefined
@@ -106,7 +106,7 @@ function getNextCookieNumber(num){
  */
 function isCookieExist(newCookieValue){
     //[result,oldestName,lastestNum,count]
-    let cookieListInfo = getCookieList();
+    let cookieListInfo = getHistoryCookieList();
     let cookieList = cookieListInfo[0]
     let oldestName = cookieListInfo[1]
     let lastestNum = cookieListInfo[2]
@@ -146,7 +146,7 @@ function setCookie(cookieValue){
     }
     else{
         //[result,oldestName,lastestNum,count]
-        let cookieListInfo = getCookieList();
+        let cookieListInfo = getHistoryCookieList();
         let cookieList = cookieListInfo[0]
         let oldestName = cookieListInfo[1]
         let lastestNum = cookieListInfo[2]
@@ -177,7 +177,7 @@ function setCookie(cookieValue){
  */
 function setRecentCommandByNum(Num){
     // [result,oldestName,lastestNum]
-    const cookieList= getCookieList()[0]
+    const cookieList= getHistoryCookieList()[0]
 
     for (let i = 0 ; i < cookieList.length ; i++){
         // [name, number, value] 
