@@ -43,6 +43,46 @@ function createCookie(name,value,cookieOption){
     document.cookie = cookieCotent 
 }
 
+
+/**
+ * get raw cookie List that split with ';'
+ * @returns cookie List that elem is [name, value]
+ */
+function getCookieList(){
+    let cookieOrigin = document.cookie
+    let result = []
+
+
+    let cookieList = cookieOrigin.split(";")
+    for (let i = 0 ; i < cookieList.length ; i++){
+        const entry = cookieList[i].split("=")
+        const name = entry[0].trim()
+        const value = entry[1].trim()
+
+        result.push([name,value])             
+    }
+
+    return result
+}
+/**
+ * 
+ * @param {string} optionName 
+ * @returns string that cookie value 
+ * @see if return value is "" then , there is no cookie that's name is option Name
+ */
+function findOptionCookieByName(optionName){
+    const cookieList = getCookieList()
+
+    for (let i = 0 ; i < cookieList.length ; i++){
+        if (cookieList[i][0] == optionName){
+            return cookieList[i][1]
+        }
+    }
+
+    return ""
+}
+
+
 /**
  * 
  * @returns [result,oldestName,lastestNum,cookieCount]
@@ -132,7 +172,7 @@ function isCookieExist(newCookieValue){
  * 쿠키 값 입력 받아서 다음 쿠키 이름 결정후 쿠키 생성.
  * @param {String} cookieValue 
  */
-function setCookie(cookieValue){
+function setHistoryCookie(cookieValue){
     
     cookieValue = cookieValue.replaceAll("\n","<br>")
     const isExistResult = isCookieExist(cookieValue)
@@ -165,8 +205,20 @@ function setCookie(cookieValue){
 
         createCookie(nextCookieName,cookieValue, HISTORY_COOKIE_OPTION)
     }
+}
 
-    
+
+function setOptionCookie(name,value){
+    const oldCookie = findOptionCookieByName(name)
+    print("setOptionCookie",oldCookie)
+    if (oldCookie == ""){
+        createCookie(name, value, OPTION_COOKIE_OPTION)
+    }
+    else{
+        deleteCookieByName(name)
+        createCookie(name, value, OPTION_COOKIE_OPTION)
+    }
+
 }
 
 

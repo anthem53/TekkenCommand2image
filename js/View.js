@@ -218,7 +218,7 @@ function drawRecentCommandHistory(){
             removeButton.type= "button"
             removeButton.className = "btn btn-danger ms-2"
             removeButton.innerHTML = "×"
-            print(cookieNum)
+            
             removeButton.onclick = function (){
                 deleteCookieRow(cookieNum)
                 deleteCookieByName(cookieName)

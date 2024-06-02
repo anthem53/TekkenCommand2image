@@ -203,7 +203,7 @@ function processCommandPara(){
     let commandInputContent = commandInput.value    
 
     if (commandInputContent.trim() != ""){
-        setCookie(commandInputContent)
+        setHistoryCookie(commandInputContent)
     }
 
     let commandLineList = prepareCommandpara(commandInputContent)

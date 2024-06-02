@@ -1,5 +1,7 @@
 let main = {
     init : function (){
+
+
         const _this = this
         const btnExcute = document.getElementById("btnExcute");
         btnExcute.onclick = _this.execute
@@ -15,7 +17,7 @@ let main = {
             executeDraw(commandParaResult)
         })
 
-        _this.test()
+
     } 
     , execute : function (){
         const commandParaResult = processCommandPara();
@@ -24,17 +26,7 @@ let main = {
     , commandHistory : function (){
         
     }
-    , test : function (){
-        window.addEventListener("keyup", e => {
-            //const commandParaResult = processCommandPara();
-            //executeDraw(commandParaResult)
-        });
-
-        window.addEventListener("mouseup", e =>{
-            //const commandParaResult = processCommandPara();
-            //executeDraw(commandParaResult)
-        })
-    }
+    
 
 }
 
@@ -48,6 +40,28 @@ let view = {
     }
 }
 
+let option = {
+    init : function (){
+        this.init_option()
+        this.set_option()
+    }
+    ,init_option : function (){
+        optionInit()
+    }
+    , set_option : function (){
+        
+        window.addEventListener("keyup", e => {
+            if (option_is_live == true){
+                const commandParaResult = processCommandPara();
+                executeDraw(commandParaResult)
+            }
+        });
+        
+    }
+
+}
+
 
 main.init();
 view.init();
+option.init();
