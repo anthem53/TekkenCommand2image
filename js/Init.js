@@ -7,7 +7,7 @@ let main = {
 
         const offcanvasHistory = document.getElementById("offcanvasHistory");
         offcanvasHistory.addEventListener("show.bs.offcanvas", function (){
-            setRecentCommandHistory()
+            drawRecentCommandHistory()
         })
 
         offcanvasHistory.addEventListener("hidden.bs.offcanvas", function (){
@@ -22,7 +22,7 @@ let main = {
         executeDraw(commandParaResult)
     }
     , commandHistory : function (){
-        //setRecentCommandHistory()
+        
     }
     , test : function (){
         window.addEventListener("keyup", e => {

@@ -174,7 +174,7 @@ function deleteCookieRow(cookieNum){
 function setRecentCommandHistory(){
     // [result,oldestName,lastestNum]
 
-    const cookieListInfo = getCookieList()
+    const cookieListInfo = getHistoryCookieList()
     let cookieList = cookieListInfo[0]
     let oldestName = cookieListInfo[1]
     let lastestNum = cookieListInfo[2]
