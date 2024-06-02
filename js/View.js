@@ -171,7 +171,7 @@ function deleteCookieRow(cookieNum){
  * 
  * return X
  */
-function setRecentCommandHistory(){
+function drawRecentCommandHistory(){
     // [result,oldestName,lastestNum]
 
     const cookieListInfo = getHistoryCookieList()
