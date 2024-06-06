@@ -63,8 +63,26 @@ let option = {
 
 let shortcut = {
     init : function (){
+        this.setShortcut();
 
-
+    }
+    , setShortcut : function (){
+        window.addEventListener("keydown" , (e)=> {
+            
+            if (e.ctrlKey && e.key == "e") {
+                e.preventDefault()
+                const commandParaResult = processCommandPara();
+                executeDraw(commandParaResult)
+            }
+            if (e.ctrlKey && e.key == "s") {
+                e.preventDefault()
+                document.getElementById("downloadAll").click();
+            }
+            if (e.ctrlKey && e.key == "h") {
+                e.preventDefault()
+                document.getElementById("btnLoadRecent").click();
+            }
+        },false)
     }
 
 }
