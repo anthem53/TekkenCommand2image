@@ -237,8 +237,14 @@ function drawRecentCommandHistory(){
 const htmlTable = getHtmlTable()
 
 async function getFileContent(filePath){
+    let originPath = window.location.pathname
+    let pathList = originPath.split("/")
+    let rootPathList = pathList.slice(0,pathList.length-1)
+    let rootPath = (rootPathList.join("/")) 
+    let targetfilePath = rootPath + filePath
 
-    return fetch(filePath)
+
+    return fetch(targetfilePath)
     .then((res) => res.text())
     .then((text) => {
         return text

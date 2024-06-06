@@ -104,3 +104,5 @@ main.init();
 view.init();
 option.init();
 shortcut.init();
+
+print(window.location.hash)
