@@ -19,7 +19,13 @@ function isDebug(){
 }
 
 function print(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
-    
+    try{
+        console.log("FROM :"+ print.caller.name)
+    }
+    catch{
+        console.log("This print is called by file. To find location by Ctrl + Shift + f function")
+    }
+
     for (let i = 0 ; i < arguments.length ; i++){
         console.log(arguments[i])
     }

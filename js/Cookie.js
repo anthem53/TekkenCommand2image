@@ -210,7 +210,7 @@ function setHistoryCookie(cookieValue){
 
 function setOptionCookie(name,value){
     const oldCookie = findOptionCookieByName(name)
-    print("setOptionCookie",oldCookie)
+    //print("setOptionCookie",oldCookie)
     if (oldCookie == ""){
         createCookie(name, value, OPTION_COOKIE_OPTION)
     }
