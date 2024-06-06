@@ -234,6 +234,37 @@ function drawRecentCommandHistory(){
     }
 }
 
+const htmlTable = getHtmlTable()
+
+async function getFileContent(filePath){
+
+    return fetch(filePath)
+    .then((res) => res.text())
+    .then((text) => {
+        return text
+    })
+    .catch((e) => console.error(e));
+
+}
+async function setBodyContent (bodyId, filePath){
+    const content = await getFileContent(filePath)
+
+    const body = document.getElementById(bodyId)
+    body.innerHTML = content
+
+}
+
+async function initHtml(){
+
+    for (let bodyId in htmlTable ){
+        let filepath = htmlTable[bodyId]
+        setBodyContent(bodyId,filepath)
+    }
+}
+
+
+
+
 
 
 

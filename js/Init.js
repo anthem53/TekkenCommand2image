@@ -1,3 +1,6 @@
+/**
+ * 버튼 등 기본적인 기능 초기화
+ */
 let main = {
     init : function (){
 
@@ -30,16 +33,21 @@ let main = {
 
 }
 
-let view = {
-    init : function (){
 
-        this.modelInit();
+/**
+ * 뷰 관련 초기화
+ */
+let view = {
+    init : async function (){
+        /* 리스트 계열로 늘어지는 html 요소를 파일로 분리 했는데 그걸 여기서 호출함.  */
+        initHtml()
     }
-    , modelInit : function (){
-        print("TEST modelInit")
-    }
+
 }
 
+/**
+ * 옵션 관련 초기화
+ */
 let option = {
     init : function (){
         this.init_option()
@@ -61,6 +69,10 @@ let option = {
 
 }
 
+
+/**
+ * 단축키 관련 초기화 
+ */
 let shortcut = {
     init : function (){
         this.setShortcut();

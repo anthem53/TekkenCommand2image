@@ -125,6 +125,11 @@ function getSymbolTable(){
     return _symbolTable
 }
 
+
+/**
+ * Symbol Style Table
+ * 각 심볼 마다 다른 스타일을 적용하기 위함.
+ */
 let _symbolStyleTable = {
     '[':' symbol_bracket ',
     ']':' symbol_bracket ',
@@ -137,6 +142,12 @@ function getSymbolStyleTable () {
 }
 
 
+/**
+ * 히스토리 쿠키 정보
+ * 유효시간 1일
+ * https only
+ * samesite에서만 사용가능이라 외부 사이트에서 해당 쿠키 활용 불가 
+ */
 const _HISTORY_COOKIE_OPTION = {
     "expires" : 86400e3+Date.now(),
     "secure" : true,
@@ -149,6 +160,12 @@ function getHistoryCookieOption (){
     return _HISTORY_COOKIE_OPTION
 }
 
+/**
+ * 옵션 쿠키 정보
+ * 유효시간 한달
+ * https only
+ * samesite에서만 사용가능이라 외부 사이트에서 해당 쿠키 활용 불가 
+ */
 const _OPTION_COOKIE_OPTION = {
     "expires" : (86400e3*30) +Date.now(),
     "secure" : true,
@@ -160,4 +177,18 @@ const _OPTION_COOKIE_OPTION = {
 function getOptionCookieOption (){
 
     return _OPTION_COOKIE_OPTION
+}
+
+
+/**
+ * Key는 내용을 담을 html 요소의 id
+ * value는 내용이 담길 html 요소의 내용이 있는 file의 path
+ */
+const _htmlTable = {
+    "GuideAccordion" : "/view/GuideContent.html"
+    //,"OptionModalBody" : "/view.OptionContent.txt"
+}
+
+function getHtmlTable (){
+    return _htmlTable
 }
