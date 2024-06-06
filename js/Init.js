@@ -61,7 +61,16 @@ let option = {
 
 }
 
+let shortcut = {
+    init : function (){
+
+
+    }
+
+}
+
 
 main.init();
 view.init();
 option.init();
+shortcut.init();
