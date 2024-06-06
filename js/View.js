@@ -269,7 +269,7 @@ async function initHtml(){
 }
 
 
-
+initHtml();
 
 
 
