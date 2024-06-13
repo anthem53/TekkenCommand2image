@@ -119,13 +119,22 @@
             
         </div>
     <script> 
-      let innerWidth = window.innerWidth
+      
       let textarea = document.getElementById('commandInput')
-      textarea.style.maxWidth = "100vw"
-      if (innerWidth >= 1034){
-        textarea.style.minWidth = "50vw"
+
+      function resize (){
+        let innerWidth = window.innerWidth
+        textarea.style.maxWidth = "100vw"
+        if (innerWidth >= 1034){
+          textarea.style.minWidth = "70vw"
+        }
       }
-      else{}
+
+      resize()
+
+      window.addEventListener("resize", resize
+      )
+      
 
 
       console.log("INDEX.HTML LOAD COMPLETE")
