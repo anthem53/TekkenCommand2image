@@ -1,6 +1,7 @@
 const IS_LIVE_OPTION_COOKIE_NAME = "IsLive"
 let option_is_live = false
 
+
 function optionInit(){
     isLiveOptionInit()
 }
