@@ -43,11 +43,11 @@ function isLiveOptionInit(){
     $('[type=radio][name="liveTranslate"]').on('change', function (){
         switch ($(this).val()) {
             case 'true':
-              setOptionCookie("true")
+              setOptionCookie(IS_LIVE_OPTION_COOKIE_NAME,"true")
               option_is_live = true
               break;
             case 'false':
-                setOptionCookie("false")
+                setOptionCookie(IS_LIVE_OPTION_COOKIE_NAME,"false")
                 option_is_live = false
               break;
         }

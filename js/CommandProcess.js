@@ -99,7 +99,7 @@ function processWord (word){
             if (symbolArrow in blackArrowTable){
                 
                 plainTextList = pushPlainTextList(plainTextList,wordResult)
-                wordResult.push([blackArrowTable[symbolArrow],ElemType.FILE])
+                wordResult.push([blackArrowTable[symbolArrow],ElemType.ARROW])
                 i += 2
             }
             else if (symbolArrow[1] == "."){
@@ -108,7 +108,7 @@ function processWord (word){
             }
             else{
                 plainTextList = pushPlainTextList(plainTextList,wordResult)
-                wordResult.push([arrowTable[word[i]],ElemType.FILE])
+                wordResult.push([arrowTable[word[i]],ElemType.ARROW])
                 i += 1
 
             }
@@ -142,7 +142,7 @@ function processWord (word){
 
             curButton = buttons.join("")
             savetarget = processButtonElement(curButton)
-            wordResult.push([savetarget,ElemType.FILE])
+            wordResult.push([savetarget,ElemType.BUTTON])
 
         }
         else if (word[i] == " "){

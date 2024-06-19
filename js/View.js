@@ -1,4 +1,5 @@
 const symbolStyleTable = getSymbolStyleTable()
+const arrowColorTable = getColorTable()
 
 function clearAllImage(){
     let resultList = document.getElementById("resultList");
@@ -93,7 +94,18 @@ function drawImage(curResultId, curCommandLine){
                 child.innerText = content
                 
             }
-            else if (type == getElemType().FILE){
+            else if (type == getElemType().ARROW) {
+                child = document.createElement('img');
+                child.crossorigin='anonymous'
+                child.style="filter : "+ arrowColorTable[option_arrow_color]
+                child.src= content
+            }
+            else if (type == getElemType().BUTTON){
+                child = document.createElement('img');
+                child.crossorigin='anonymous'
+                child.src= content
+            }
+            else if (type.includes(getElemType().FILE)){
                 child = document.createElement('img');
                 child.crossorigin='anonymous'
                 child.src= content

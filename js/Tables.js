@@ -70,6 +70,8 @@ function getButton2BitTable () {
  * @see 커맨드 워드의 원소들의 ENUM TYPE
  */
 const _ElemType = {
+    ARROW: "file_arrow" ,
+    BUTTON: "file_button" ,
     FILE: "file" ,
     SYMBOL: "symbol",
     BLANK: "blank" ,
@@ -191,4 +193,21 @@ const _htmlTable = {
 
 function getHtmlTable (){
     return _htmlTable
+}
+
+
+/**
+ * color css style filter value
+ */
+const _colorTable = {
+    pink : "invert(46%) sepia(100%) saturate(7493%) hue-rotate(296deg) brightness(117%) contrast(126%)",
+    yellow : "invert(85%) sepia(78%) saturate(1115%) hue-rotate(357deg) brightness(111%) contrast(104%);",
+    red : "invert(30%) sepia(92%) saturate(6802%) hue-rotate(354deg) brightness(96%) contrast(126%);",
+    blue : "invert(7%) sepia(100%) saturate(7489%) hue-rotate(247deg) brightness(107%) contrast(137%)",
+    white : "",
+    green :"invert(67%) sepia(98%) saturate(3568%) hue-rotate(81deg) brightness(116%) contrast(125%);"
+}
+
+function getColorTable(){
+    return _colorTable
 }
