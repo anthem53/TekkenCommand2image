@@ -1,13 +1,22 @@
 
 const ElemType = getElemType()
 
-const arrowTable = getArrowTable()
+let arrowTable = getArrowTable()
 
 const blackArrowTable = getBlackArrowTable()
 
 const buttonTable = getButton2BitTable()
 
 const symbolTable = getSymbolTable()
+
+
+/**
+ * @see 색상별 arrowTable을 동적으로 지정하기 위한 함수
+ * @param {object} _arrowTable 
+ */
+function setArrowTable(_arrowTable){
+    arrowTable = _arrowTable
+}
 
 
 /**

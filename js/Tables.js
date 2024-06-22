@@ -16,6 +16,39 @@ const _arrowTable = {
 }
 
 /**
+ * @see 방향키 이미지 주소가 담긴 테이블
+ * @see commandProcess.js에서 사용
+ */
+const _greenArrowTable = {
+    1:"images/greenArrow/w1.png",
+    2:"images/greenArrow/w2.png",
+    3:"images/greenArrow/w3.png",
+    4:"images/greenArrow/w4.png",
+    N:"images/greenArrow/w5.png",
+    5:"images/greenArrow/w5.png",
+    6:"images/greenArrow/w6.png",
+    7:"images/greenArrow/w7.png",
+    8:"images/greenArrow/w8.png",
+    9:"images/greenArrow/w9.png",
+}
+
+/**
+ * 색상을 동적으로 지정하기 위한 색상별 방향키 이미지 테이블을 색상과 매핑한 오브젝트
+ */
+const _arrowTableTable = {
+    white : _arrowTable,
+    green : _greenArrowTable
+}
+
+/**
+ * 색상이름으로 해당 색상 방향키 이미지 테이블을 가진 테이블들을 반환하는 함수
+ * @returns 
+ */
+function getArrowTableTable (){
+    return _arrowTableTable
+}
+
+/**
  * @see 검은 방향키 이미지 주소가 담긴 테이블
  * @see 검은 방향키는 해당 방향키를 꾹 누른다는 뜻.
  * @see commandProcess.js에서 사용

@@ -25,6 +25,7 @@ function initArrowColorOption(){
         option_arrow_color = $(this).val()
         setOptionCookie(ARROW_COLOR,option_arrow_color)
         print(option_arrow_color)
+        setArrowTable(getArrowTableTable()[option_arrow_color])
     })
     option_arrow_color = getOptionInitValue(ARROW_COLOR,"white")
     setArrowColor(option_arrow_color)
@@ -35,8 +36,9 @@ function getArrowColor(){
     content = 'input[name="'+ARROW_COLOR+'"]:checked'
     return document.querySelector(content).value
 }
-function setArrowColor(optionValue){
-    $('input[name='+ARROW_COLOR+']:input[value="'+optionValue+'"]').attr("checked", true);	// 선택	
+function setArrowColor(option_arrow_color){
+    setArrowTable(getArrowTableTable()[option_arrow_color])
+    $('input[name='+ARROW_COLOR+']:input[value="'+option_arrow_color+'"]').attr("checked", true);	// 선택	
 }
 
 function isLiveOptionInit(){

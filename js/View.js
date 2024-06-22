@@ -97,7 +97,6 @@ function drawImage(curResultId, curCommandLine){
             else if (type == getElemType().ARROW) {
                 child = document.createElement('img');
                 child.crossorigin='anonymous'
-                child.style="filter : "+ arrowColorTable[option_arrow_color]
                 child.src= content
             }
             else if (type == getElemType().BUTTON){
