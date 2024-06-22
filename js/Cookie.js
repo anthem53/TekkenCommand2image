@@ -55,7 +55,7 @@ function getCookieList(){
 
     let cookieList = cookieOrigin.split(";")
     for (let i = 0 ; i < cookieList.length ; i++){
-        if (entry != ''){
+        if (cookieList[i] != ''){
             const entry = cookieList[i].split("=")
             const name = entry[0].trim()
             const value = entry[1].trim()
