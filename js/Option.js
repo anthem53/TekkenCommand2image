@@ -1,7 +1,7 @@
 const IS_LIVE_OPTION_COOKIE_NAME = "IsLive"
 const IS_LIVE_RADIO_NAME = "liveTranslate"
 const ARROW_COLOR = "arrowColor"
-const DARK_SYMBOL = "darkSymbol"
+const SYMBOL_COLOR = "symbolColor"
 
 let option_is_live = false
 let option_arrow_color = "white"
@@ -29,21 +29,21 @@ function getOptionInitValue(optionName, defaultValue){
     }
 }
 function initSymbolColorOption(){
-    $('[type=radio][name="'+DARK_SYMBOL+'"]').on('change', function (){
+    $('[type=radio][name="'+SYMBOL_COLOR+'"]').on('change', function (){
         option_symbol_color = $(this).val()
-        setOptionCookie(DARK_SYMBOL,option_symbol_color)
+        setOptionCookie(SYMBOL_COLOR,option_symbol_color)
         print(option_symbol_color)
     })
-    option_symbol_color = getOptionInitValue(DARK_SYMBOL,"black")
+    option_symbol_color = getOptionInitValue(SYMBOL_COLOR,"black")
     setSymbolColor(option_symbol_color)
-    setOptionCookie(DARK_SYMBOL,option_symbol_color)
+    setOptionCookie(SYMBOL_COLOR,option_symbol_color)
 }
 
 function setSymbolColor(option_symbol_color){
-    $('input[name='+DARK_SYMBOL+']:input[value="'+option_symbol_color+'"]').attr("checked", true);	// 선택	
+    $('input[name='+SYMBOL_COLOR+']:input[value="'+option_symbol_color+'"]').attr("checked", true);	// 선택	
 }
 function getSymbolColor(){
-    content = 'input[name="'+DARK_SYMBOL+'"]:checked'
+    content = 'input[name="'+SYMBOL_COLOR+'"]:checked'
     return document.querySelector(content).value
 }
 
@@ -101,4 +101,3 @@ function setIsLive(optionValue){
 
 }
 
-print(getArrowColor())
