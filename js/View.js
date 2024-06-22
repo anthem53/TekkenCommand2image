@@ -31,7 +31,7 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(label)
 
     let resultContentCotainer = document.createElement('div')
-    resultContentCotainer.className = "my-2;"
+    resultContentCotainer.className = "my-2"
 
     let resultContent = document.createElement('span')
     resultContent.id = resultId
@@ -43,7 +43,7 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(resultContentCotainer)
 
     let downloadButton = document.createElement('button')
-    downloadButton.className= "btn btn-success"
+    downloadButton.className= "btn btn-success mx"
     downloadButton.innerText = "다운로드"
     
     let downloadFunction = function(){
