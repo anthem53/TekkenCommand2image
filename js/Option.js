@@ -1,15 +1,24 @@
 const IS_LIVE_OPTION_COOKIE_NAME = "IsLive"
 const IS_LIVE_RADIO_NAME = "liveTranslate"
 const ARROW_COLOR = "arrowColor"
+const DARK_SYMBOL = "darkSymbol"
 
 let option_is_live = false
 let option_arrow_color = "white"
+let option_symbol_color = "black"
 
 function optionInit(){
     isLiveOptionInit()
     initArrowColorOption()
+    initSymbolColorOption()
 }
 
+/**
+ * 옵션의 이름과 디폴트 값을 받아 해당 옵션이름의 쿠키가 있으면 해당 값을 반환. 없으면 디폴트 값을 반환.
+ * @param {string} optionName 
+ * @param {string} defaultValue 
+ * @returns 
+ */
 function getOptionInitValue(optionName, defaultValue){
     const oldCookie =  findOptionCookieByName(optionName)
     if (oldCookie == ""){
@@ -19,12 +28,29 @@ function getOptionInitValue(optionName, defaultValue){
         return oldCookie
     }
 }
+function initSymbolColorOption(){
+    $('[type=radio][name="'+DARK_SYMBOL+'"]').on('change', function (){
+        option_symbol_color = $(this).val()
+        setOptionCookie(DARK_SYMBOL,option_symbol_color)
+        print(option_symbol_color)
+    })
+    option_symbol_color = getOptionInitValue(DARK_SYMBOL,"black")
+    setSymbolColor(option_symbol_color)
+    setOptionCookie(DARK_SYMBOL,option_symbol_color)
+}
+
+function setSymbolColor(option_symbol_color){
+    $('input[name='+DARK_SYMBOL+']:input[value="'+option_symbol_color+'"]').attr("checked", true);	// 선택	
+}
+function getSymbolColor(){
+    content = 'input[name="'+DARK_SYMBOL+'"]:checked'
+    return document.querySelector(content).value
+}
 
 function initArrowColorOption(){
     $('[type=radio][name="'+ARROW_COLOR+'"]').on('change', function (){
         option_arrow_color = $(this).val()
         setOptionCookie(ARROW_COLOR,option_arrow_color)
-        print(option_arrow_color)
         setArrowTable(getArrowTableTable()[option_arrow_color])
     })
     option_arrow_color = getOptionInitValue(ARROW_COLOR,"white")

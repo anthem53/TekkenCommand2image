@@ -31,7 +31,7 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(label)
 
     let resultContentCotainer = document.createElement('div')
-    resultContentCotainer.className = "my-2"
+    resultContentCotainer.className = "my-2;"
 
     let resultContent = document.createElement('span')
     resultContent.id = resultId
@@ -90,7 +90,7 @@ function drawImage(curResultId, curCommandLine){
             if (type == getElemType().SYMBOL){
                 child = document.createElement('span');
                 child.className = "symbol_base mx-1" + symbolStyleTable[content]
-                child.style="color:black"
+                child.style="color:"+getSymbolColor()
                 child.innerText = content
                 
             }
