@@ -3,15 +3,61 @@ const IS_LIVE_RADIO_NAME = "liveTranslate"
 const ARROW_COLOR = "arrowColor"
 const SYMBOL_COLOR = "symbolColor"
 
+const DARK_MODE = "darkmode"
+
 let option_is_live = false
 let option_arrow_color = "white"
 let option_symbol_color = "black"
+let option_isDarkMode= false
 
+/**
+ * option 기능 초기화 하는 부분
+ */
 function optionInit(){
     isLiveOptionInit()
     initArrowColorOption()
     initSymbolColorOption()
+    initDarkModeSwitch()
 }
+
+function initDarkModeSwitch(){
+    const darkmodeSwitch =  document.getElementById(DARK_MODE)
+    
+    darkmodeSwitch.addEventListener('click', e =>{
+        
+        option_isDarkMode = darkmodeSwitch.checked
+        setOptionCookie(DARK_MODE,option_isDarkMode)
+        setDarkModeSwitch(option_isDarkMode)
+
+    })
+    //print(darkmodeSwitch.checked)
+    option_isDarkMode = JSON.parse(getOptionInitValue(DARK_MODE,false))
+    
+    setDarkModeSwitch(option_isDarkMode)
+    
+    //print(darkmodeSwitch.checked)
+    setOptionCookie(DARK_MODE,option_isDarkMode)
+
+    //print(darkmodeSwitch.checked)
+}
+
+
+function getDarkModeSwitch(){
+    
+    const darkmodeSwitch =   document.getElementById(DARK_MODE)
+    return darkmodeSwitch.checked
+}
+
+
+function setDarkModeSwitch(value){
+    
+    const darkmodeSwitch =  document.getElementById(DARK_MODE)
+    darkmodeSwitch.checked = value
+
+}
+
+
+
 
 /**
  * 옵션의 이름과 디폴트 값을 받아 해당 옵션이름의 쿠키가 있으면 해당 값을 반환. 없으면 디폴트 값을 반환.
