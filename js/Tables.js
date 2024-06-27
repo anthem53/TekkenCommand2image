@@ -244,3 +244,17 @@ const _colorTable = {
 function getColorTable(){
     return _colorTable
 }
+
+const _backgroundColorTable = {
+    "normal" : "#F0F3BD",
+    "darkmode" : "#A0A068"
+}
+
+const _elementColorTable = {
+    "normal" : "#F0F3BD",
+    "darkmode" : "#B0B179"
+}
+
+function getBackgroundColorTable (){
+    return _backgroundColorTable
+}

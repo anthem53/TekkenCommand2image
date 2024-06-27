@@ -245,6 +245,12 @@ function drawRecentCommandHistory(){
     }
 }
 
+function setBodyColor(color){
+    const body = document.getElementById('bodyId')
+    body.style = "background-color : " + color
+}
+
+
 const htmlTable = getHtmlTable()
 
 async function getFileContent(filePath){
@@ -278,9 +284,6 @@ async function initHtml(){
         setBodyContent(bodyId,filepath)
     }
 }
-
-
-initHtml();
 
 
 

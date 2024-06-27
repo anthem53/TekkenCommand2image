@@ -10,54 +10,16 @@ let option_arrow_color = "white"
 let option_symbol_color = "black"
 let option_isDarkMode= false
 
+
 /**
  * option 기능 초기화 하는 부분
  */
 function optionInit(){
     isLiveOptionInit()
     initArrowColorOption()
-    initSymbolColorOption()
+    //initSymbolColorOption()
     initDarkModeSwitch()
 }
-
-function initDarkModeSwitch(){
-    const darkmodeSwitch =  document.getElementById(DARK_MODE)
-    
-    darkmodeSwitch.addEventListener('click', e =>{
-        
-        option_isDarkMode = darkmodeSwitch.checked
-        setOptionCookie(DARK_MODE,option_isDarkMode)
-        setDarkModeSwitch(option_isDarkMode)
-
-    })
-    //print(darkmodeSwitch.checked)
-    option_isDarkMode = JSON.parse(getOptionInitValue(DARK_MODE,false))
-    
-    setDarkModeSwitch(option_isDarkMode)
-    
-    //print(darkmodeSwitch.checked)
-    setOptionCookie(DARK_MODE,option_isDarkMode)
-
-    //print(darkmodeSwitch.checked)
-}
-
-
-function getDarkModeSwitch(){
-    
-    const darkmodeSwitch =   document.getElementById(DARK_MODE)
-    return darkmodeSwitch.checked
-}
-
-
-function setDarkModeSwitch(value){
-    
-    const darkmodeSwitch =  document.getElementById(DARK_MODE)
-    darkmodeSwitch.checked = value
-
-}
-
-
-
 
 /**
  * 옵션의 이름과 디폴트 값을 받아 해당 옵션이름의 쿠키가 있으면 해당 값을 반환. 없으면 디폴트 값을 반환.
@@ -74,23 +36,56 @@ function getOptionInitValue(optionName, defaultValue){
         return oldCookie
     }
 }
-function initSymbolColorOption(){
-    $('[type=radio][name="'+SYMBOL_COLOR+'"]').on('change', function (){
-        option_symbol_color = $(this).val()
-        setOptionCookie(SYMBOL_COLOR,option_symbol_color)
-        print(option_symbol_color)
+
+
+function initDarkModeSwitch(){
+    const darkmodeSwitch =  document.getElementById(DARK_MODE)
+    
+    darkmodeSwitch.addEventListener('click', e =>{
+        
+        option_isDarkMode = darkmodeSwitch.checked
+        setOptionCookie(DARK_MODE,option_isDarkMode)
+        setDarkModeSwitch(option_isDarkMode)
+
+        // 다크모드로 바꾸고 나서 다시 변환하여 바뀐 옵션 적용하는 장면
+        const commandParaResult = processCommandPara();
+        executeDraw(commandParaResult)
+
     })
-    option_symbol_color = getOptionInitValue(SYMBOL_COLOR,"black")
-    setSymbolColor(option_symbol_color)
-    setOptionCookie(SYMBOL_COLOR,option_symbol_color)
+    
+    option_isDarkMode = JSON.parse(getOptionInitValue(DARK_MODE,false))
+    setDarkModeSwitch(option_isDarkMode)    
+    setOptionCookie(DARK_MODE,option_isDarkMode)
+
 }
 
-function setSymbolColor(option_symbol_color){
-    $('input[name='+SYMBOL_COLOR+']:input[value="'+option_symbol_color+'"]').attr("checked", true);	// 선택	
+
+function getDarkModeSwitch(){
+    
+    const darkmodeSwitch =   document.getElementById(DARK_MODE)
+    return darkmodeSwitch.checked
 }
+
+
+function setDarkModeSwitch(value){
+    
+    const darkmodeSwitch =  document.getElementById(DARK_MODE)
+    darkmodeSwitch.checked = value
+
+    if (value == true){
+        enableDarkmode()
+        option_symbol_color = "white"
+    }
+    else{ // value == false
+        disableDarkmode()
+        option_symbol_color = "black"
+    }
+
+}
+
+
 function getSymbolColor(){
-    content = 'input[name="'+SYMBOL_COLOR+'"]:checked'
-    return document.querySelector(content).value
+    return option_symbol_color
 }
 
 function initArrowColorOption(){
@@ -98,6 +93,10 @@ function initArrowColorOption(){
         option_arrow_color = $(this).val()
         setOptionCookie(ARROW_COLOR,option_arrow_color)
         setArrowTable(getArrowTableTable()[option_arrow_color])
+
+        // 옵션 변환후 재 변환
+        const commandParaResult = processCommandPara();
+        executeDraw(commandParaResult)
     })
     option_arrow_color = getOptionInitValue(ARROW_COLOR,"white")
     setArrowColor(option_arrow_color)
@@ -133,7 +132,7 @@ function isLiveOptionInit(){
 }
 
 function getIsLive(){
-    return document.querySelector('input[name="liveTranslate"]:checked').value
+    return option_is_live
 }
 
 function setIsLive(optionValue){
@@ -144,6 +143,8 @@ function setIsLive(optionValue){
     else{
         $('input[name=liveTranslate]:input[value="false"]').attr("checked", true);	// 선택	
     }
+
+    option_is_live = optionValue
 
 }
 
