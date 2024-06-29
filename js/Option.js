@@ -17,8 +17,8 @@ let option_isDarkMode= false
 function optionInit(){
     isLiveOptionInit()
     initArrowColorOption()
-    //initSymbolColorOption()
     initDarkModeSwitch()
+
 }
 
 /**
@@ -44,7 +44,7 @@ function initDarkModeSwitch(){
     darkmodeSwitch.addEventListener('click', e =>{
         
         option_isDarkMode = darkmodeSwitch.checked
-        setOptionCookie(DARK_MODE,option_isDarkMode)
+        setOptionCookie(DARK_MODE,option_isDarkMode.toString())
         setDarkModeSwitch(option_isDarkMode)
 
         // 다크모드로 바꾸고 나서 다시 변환하여 바뀐 옵션 적용하는 장면

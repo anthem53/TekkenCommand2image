@@ -32,15 +32,15 @@ const OPTION_COOKIE_OPTION = getOptionCookieOption()
  */
 function createCookie(name,value,cookieOption){
         
-    let cookieCotent = name +"=" + value
+    let cookieCotent = name +"=" + encode(value)
         +"; expires=" + new Date(cookieOption.expires)
         +"; secure"
         +"; path=" + cookieOption.path
         +"; Samesite=" + cookieOption.SameSite
         +";"
 
-    //print(cookieCotent)
-    document.cookie = cookieCotent 
+
+    document.cookie = cookieCotent
 }
 
 
@@ -56,9 +56,13 @@ function getCookieList(){
     let cookieList = cookieOrigin.split(";")
     for (let i = 0 ; i < cookieList.length ; i++){
         if (cookieList[i] != ''){
-            const entry = cookieList[i].split("=")
-            const name = entry[0].trim()
-            const value = entry[1].trim()
+            const raw = cookieList[i]
+            const seperatorIndex = raw.indexOf("=")
+        
+            const name = raw.substring(0,seperatorIndex).trim()
+            let value = raw.substring(seperatorIndex+1).trim()
+            
+            value = decode(value)
             result.push([name,value])       
         }         
     }
@@ -76,7 +80,9 @@ function findOptionCookieByName(optionName){
 
     for (let i = 0 ; i < cookieList.length ; i++){
         if (cookieList[i][0] == optionName){
-            return cookieList[i][1]
+            
+            const result = cookieList[i][1]
+            return result
         }
     }
 
@@ -93,40 +99,32 @@ function findOptionCookieByName(optionName){
  * cookiecount는 저장된 쿠키 개수
  */
 function getHistoryCookieList(){
-    let cookieOrigin = document.cookie
     let result = []
     let oldestName = undefined
     let lastestNum = 0
     let count = 0
 
-    if (cookieOrigin != ""){
+    const allCookieList = getCookieList()
 
-        let cookieList = cookieOrigin.split(";")
+    for (let i = 0 ; i < allCookieList.length; i ++){
+        const name = allCookieList[i][0]
+        const value = allCookieList[i][1]
 
-        for (let i = 0 ; i < cookieList.length ; i++){
-            const entry = cookieList[i].split("=")
-            const name = entry[0].trim()
-            const value = entry[1].trim()
+        if (name.indexOf(COOKIE_NAME) != -1){
+            if (oldestName == undefined){
+                oldestName = name
+            }else{;}
 
-            if (name.indexOf(COOKIE_NAME) != -1){
-                if (oldestName == undefined){
-                    oldestName = name
-                }
-                //print(name, value)
-                let cookieNum =Number(name.split("_")[1])
-                result.push([name,cookieNum,value])
-                count += 1
-                lastestNum= cookieNum
-            }
-            else{;}        
+            let cookieNum =Number(name.split("_")[1])
+            result.push([name,cookieNum,value])
+            count += 1
+            lastestNum= cookieNum
         }
+        else{}    
 
-        //print(result)
     }
 
     return [result,oldestName,lastestNum,count]
-
-
 }
 
 /**
@@ -211,7 +209,6 @@ function setHistoryCookie(cookieValue){
 
 function setOptionCookie(name,value){
     const oldCookie = findOptionCookieByName(name)
-    //print("setOptionCookie",oldCookie)
     if (oldCookie == ""){
         createCookie(name, value, OPTION_COOKIE_OPTION)
     }
@@ -238,7 +235,6 @@ function setRecentCommandByNum(Num){
         const cookieNum = cookie[1]
         let cookieValue = cookie[2]
         if (cookieNum == Num){
-            
             setCommandInputFromCookie(cookieValue)
             return
         }
