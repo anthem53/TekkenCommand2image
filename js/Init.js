@@ -80,7 +80,6 @@ let shortcut = {
     }
     , setShortcut : function (){
         window.addEventListener("keydown" , (e)=> {
-            
             if (e.ctrlKey && e.key == "e") {
                 e.preventDefault()
                 const commandParaResult = processCommandPara();
