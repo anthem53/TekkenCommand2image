@@ -1,7 +1,7 @@
 /**
  * 이 테이블은 파이썬으로 만듦.
  */
-const keyCombinationTable = { 
+const _keyCombinationTable = { 
     "LP+RP" : "images/c4.png"
     ,"LP+LK" : "images/c6.png"
     ,"LP+RK" : "images/c10.png"
@@ -2077,4 +2077,8 @@ const keyCombinationTable = {
 
 
 
-    console.log(keyCombinationTable)
+
+
+function getKeyCombinationTable (){
+    return _keyCombinationTable
+}

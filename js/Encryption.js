@@ -12,7 +12,7 @@ function encode(plain) {
 
 function decode(base64) {
 
-    console.log(base64)
+    
     if(oldValueList.includes(base64)){
         return base64
     }
