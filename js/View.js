@@ -215,9 +215,11 @@ function drawRecentCommandHistory(){
             numberLabel.type= "button"
             numberLabel.className = "btn btn-primary me-2"
             numberLabel.innerHTML = rowNum
-            numberLabel.onclick = function(){ setCommandInputFromCookie(cookieValue)}
+            numberLabel.onclick = function(){ 
+                setCommandInputFromCookie(cookieValue)
+            }
             historyRow.appendChild(numberLabel)
-            //<button type="button" class="list-group-item list-group-item-action">A second button item</button>
+            
             let tempBtn = document.createElement("button")
             tempBtn.type= "button"
             tempBtn.className = "list-group-item list-group-item-action"

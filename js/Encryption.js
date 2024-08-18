@@ -1,7 +1,3 @@
-const oldValueList = ['true', 'false', 'white', 'green']
-    
-
-
 function encode(plain) {
 
     const bytes = new TextEncoder().encode(plain)
@@ -12,11 +8,6 @@ function encode(plain) {
 
 function decode(base64) {
 
-    
-    if(oldValueList.includes(base64)){
-        return base64
-    }
-    
     try{
         const binString = atob(base64);
         const Bytes = Uint8Array.from(binString, (m) => m.codePointAt(0))
