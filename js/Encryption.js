@@ -1,3 +1,9 @@
+/**
+ * @see Encryption.js
+ * @see 문자열 암호화 함수
+ * @param {string} plain 
+ * @returns 
+ */
 function encode(plain) {
 
     const bytes = new TextEncoder().encode(plain)
@@ -5,7 +11,12 @@ function encode(plain) {
     return btoa(binString)
 }
 
-
+/**
+ * @see Encryption.js
+ * @see 암호문 복호화 함수. encode로 복호화 한 것을 암호화함.
+ * @param {string} base64 
+ * @returns 
+ */
 function decode(base64) {
 
     try{
@@ -22,7 +33,8 @@ function decode(base64) {
     }
 
 }
-  
+
+/* 테스트 전용 문구. */
 //const SampleString = 'hello⛳❤️🧀';
 
 //const temp ="plain text"

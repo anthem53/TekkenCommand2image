@@ -38,6 +38,9 @@ function getOptionInitValue(optionName, defaultValue){
 }
 
 
+/**
+ * 다크모드 스위치를 초기화 하는 함수
+ */
 function initDarkModeSwitch(){
     const darkmodeSwitch =  document.getElementById(DARK_MODE)
     
@@ -60,13 +63,21 @@ function initDarkModeSwitch(){
 }
 
 
+/**
+ * @see 다크모드 스위치 값을 받음
+ * @see checked 유무를 확인하여 결과값을 받음
+ * @returns boolean
+ */
 function getDarkModeSwitch(){
     
     const darkmodeSwitch =   document.getElementById(DARK_MODE)
     return darkmodeSwitch.checked
 }
 
-
+/**
+ * @see 다크모드 스위치 값을 받아
+ * @param {boolean} value 
+ */
 function setDarkModeSwitch(value){
     
     const darkmodeSwitch =  document.getElementById(DARK_MODE)
@@ -83,11 +94,20 @@ function setDarkModeSwitch(value){
 
 }
 
-
+/**
+ * @method 기호 색 반환/ black or white
+ * @see view.js 에서 사용
+ * @returns String
+ */
 function getSymbolColor(){
     return option_symbol_color
 }
 
+
+/**
+ * @method 1234n6789 에 해당하는 화살표 색상 옵션값 초기화
+ * @see 
+ */
 function initArrowColorOption(){
     $('[type=radio][name="'+ARROW_COLOR+'"]').on('change', function (){
         option_arrow_color = $(this).val()
@@ -103,15 +123,28 @@ function initArrowColorOption(){
     setOptionCookie(ARROW_COLOR,option_arrow_color)
 }
 
+/**
+ * @see 화살표 색상 옵션 값 얻는 함수
+ * @returns 
+ */
 function getArrowColor(){
     content = 'input[name="'+ARROW_COLOR+'"]:checked'
     return document.querySelector(content).value
 }
+
+/**
+ * @see 화살표 색상 옵션 값 설정하는 함수
+ * @param {String} option_arrow_color 
+ */
 function setArrowColor(option_arrow_color){
     setArrowTable(getArrowTableTable()[option_arrow_color])
     $('input[name='+ARROW_COLOR+']:input[value="'+option_arrow_color+'"]').attr("checked", true);	// 선택	
 }
 
+
+/**
+ * 자동 변환 옵션 값 초기화 하는 함수
+ */
 function isLiveOptionInit(){
     $('[type=radio][name="liveTranslate"]').on('change', function (){
         switch ($(this).val()) {
@@ -131,10 +164,19 @@ function isLiveOptionInit(){
     setOptionCookie(IS_LIVE_OPTION_COOKIE_NAME,option_is_live.toString())
 }
 
+
+/**
+ * 자동 변환 옵션 값 얻는 함수
+ */
 function getIsLive(){
     return option_is_live
 }
 
+
+/**
+ * @see  자동 변환 옵션 값 설정하는 함수
+ * @param {boolean} optionValue 
+ */
 function setIsLive(optionValue){
     
     if (optionValue == true){
