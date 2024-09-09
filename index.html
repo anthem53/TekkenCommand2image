@@ -13,6 +13,8 @@
 
 </head>
 <body class="pt-5"  style="background-color:#F0F3BD;" id="bodyId">
+
+  <!-- 우측 상단 다크모드 토글 스위치 -->
     <div class=" container d-flex justify-content-end">
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" role="switch" name="darkmode" id="darkmode">
@@ -20,6 +22,7 @@
       </div>
     </div>
 
+    <!-- 좌측 상단 가이드 제보 옵션 버튼 -->
     <div class='container d-flex justify-content-start'>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GuideModal" data-bs-whatever="@mdo">가이드</button>
         
@@ -34,11 +37,8 @@
         </button>
         
     </div>
-    <div class='container d-flex justify-content-start'>
 
-    </div>
-
-    <!-- Modal -->
+    <!-- 옵션 Modal -->
 <div class="modal fade" id="OptionModal" tabindex="-1" aria-labelledby="OptionModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -78,37 +78,9 @@
             녹색
           </label>
         </div>
-        <!-- <div class="form-check">
-          <input class="form-check-input" type="radio" name="arrowColor" value="red">
-          <label class="form-check-label" for="EnabledLive">
-            붉은색
-          </label>
-        </div>
-
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="arrowColor" value="yellow">
-          <label class="form-check-label" for="EnabledLive">
-            노란색 (개선필요)
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="arrowColor" value="pink">
-          <label class="form-check-label" for="EnabledLive">
-            분홍색
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="arrowColor" value="blue">
-          <label class="form-check-label" for="EnabledLive">
-            파랑색 (개선필요)
-          </label>
-        </div> -->
-
 
         <!-- 옵션 3 -->
 
-
-         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -119,7 +91,7 @@
 </div>
 
 
-
+    <!-- 가이드 Modal  내용은 다른 파일로 분리. -->
     <div class="modal fade" id="GuideModal" tabindex="-1" aria-labelledby="GuideModal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -138,7 +110,7 @@
     </div>
     
 
-
+    <!-- 우측 커맨드 히스토리 표시를 위한 오프캔버스 -->
      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasHistory" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasRightLabel">최근 작성한 커맨드 목록</h5>
@@ -152,7 +124,7 @@
     </div>
       
 
-
+    <!-- 본 사이트 핵심 로직 -->
     <div class='d-flex justify-content-center'>
         <div class='flex-column  justify-content-center' style="text-align:center;">
             <h1 id="title"> 커맨드 표를 이미지로 만드는 곳 </h1>
@@ -161,21 +133,17 @@
                 <button type="button" class="btn btn-outline-dark" id="btnExcute">이미지로 변환 </button>
                 <button type="button" class="btn btn-outline-dark" id="downloadAll"> 일괄 다운로드 </button>
                 <button type="button" class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasHistory" aria-controls="offcanvasExample" id="btnLoadRecent"> 최근 커맨드 로드 </button>
-                
             </div>
 
             <div  class="h2 pb-3" style="border-bottom: 5px dashed darkgray; " id="resultTitleId" > 결과</div>
-        
-            <div id="resultList">
-
-            </div>
-            
+            <div id="resultList"></div>
         </div>
+    </div>
         
     <script> 
       
+      // 창 크기에 따라 텍스트 박스 크기 조절.
       let textarea = document.getElementById('commandInput')
-
       function resize (){
         let innerWidth = window.innerWidth
         textarea.style.maxWidth = "100vw"
@@ -183,13 +151,9 @@
           textarea.style.minWidth = "70vw"
         }
       }
-
       resize()
       window.addEventListener("resize", resize )
       
-
-
-      console.log("INDEX.HTML LOAD COMPLETE")
     </script>
 
 

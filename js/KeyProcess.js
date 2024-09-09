@@ -12,7 +12,6 @@ const keyCombinationTable = getKeyCombinationTable()
  */
 function processButtonElement(command){
     if (command in keyCombinationTable){
-        //print("In table" )
         return keyCombinationTable[command]
     }
     else{
@@ -21,17 +20,12 @@ function processButtonElement(command){
         
         for (const buttonIndex in buttonList){
             const button = buttonList[buttonIndex]
-        
             result = result | button2BitTable[button]
         }
-        
-        
+
         result = bit2FileTable[result]
-        
         return result
-
     }
-
 }
 
 
