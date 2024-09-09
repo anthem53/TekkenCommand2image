@@ -62,7 +62,7 @@ function addResultElement(resultNum,title,rawLine){
 
                 const link = document.createElement("a");
                 link.href = image;
-                link.download = "tekkenCommandImage.png";
+                link.download = "tekkenCommandImage_"+String(resultNum+1).padStart(2,"0")+".png";
                 link.click();
           
         });
