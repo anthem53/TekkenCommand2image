@@ -1,3 +1,8 @@
+/**
+ * View 파일의 init 파일 해당 파일이 먼저 시작되고 하위 View 관련 파일들이 시작됨.
+ * 만약 index.html에서 js 호출하는 순서가 잘못 될 경우 정상적인 동작을 하지 않을 수 있음.
+ */
+
 const symbolStyleTable = getSymbolStyleTable()
 const arrowColorTable = getColorTable()
 const htmlTable = getHtmlTable()
