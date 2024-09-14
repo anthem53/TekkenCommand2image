@@ -21,14 +21,21 @@ function addResultElement(resultNum,title,rawLine){
     let resultList = document.getElementById('resultList');
 
 
+    // 하나의 커맨드 라인에 대한 결과가 들어갈 값.
     let resultElement = document.createElement('div');
     resultElement.className = "my-4"
-    
+
+
+    let resultElementHeader = document.createElement('span')
+    resultElement.appendChild(resultElementHeader)
+
     let label = document.createElement('div')
-    label.className = "h3 border border border-3 border-dark "
-    label.style="text-align:center; background-color: white; "
+    label.className = "h3 border border border-3 border-dark rounded  mt-2"
+    label.style="text-align:center; background-color: white;"
     label.innerHTML = rawLine
     resultElement.appendChild(label)
+
+    
 
     let resultContentCotainer = document.createElement('div')
     resultContentCotainer.className = "my-2"
@@ -43,8 +50,8 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(resultContentCotainer)
 
     let downloadButton = document.createElement('button')
-    downloadButton.className= "btn btn-success mx"
-    downloadButton.innerText = "다운로드"
+    downloadButton.className= "btn btn-success mb-3"
+    downloadButton.innerText = `다운로드 (${String(resultNum+1).padStart(2,"0")})`
     
     let downloadFunction = function(){
 
@@ -125,7 +132,7 @@ function drawImage(curResultId, curCommandLine){
 
 
 /**
- * @see 입력 커맨드를 처리한 결과를 그리고 다운로드 버튼을 생성함.
+ * @see 입력 커맨드를 처리한 결과와 다운로드 버튼을 생성함.
  * @param {*} commmandParaResult 
  */
 function executeDraw(commmandParaResult){
