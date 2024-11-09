@@ -1,10 +1,17 @@
 @font-face {
-    font-family: 'Danjo-bold-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
+    font-family: 'MaplestoryOTFBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+  }
+  
+@import url('https://fastly.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+  
+.label {
+    font-family: "MaplestoryOTFBold";
 }
 
-title {
-    font-family: 'Danjo-bold-Regular';
+.common-text {
+    font-family: "galmuri";
 }
+  

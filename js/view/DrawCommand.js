@@ -30,9 +30,9 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(resultElementHeader)
 
     let label = document.createElement('div')
-    label.className = "h3 border border border-3 border-dark rounded  mt-2"
+    label.className = "h3 border border border-3 border-dark rounded  mt-2 common-text"
     label.style="text-align:center; background-color: white;"
-    label.innerHTML = rawLine
+    label.innerText = rawLine
     resultElement.appendChild(label)
 
     

@@ -8,6 +8,7 @@
     <link rel='stylesheet' href="tekkenCommand.css">
     <link rel='stylesheet' href="./font/font.css">
 
+    
     <title> 철권 커맨드 이미지 변환기</title>
 
 
@@ -18,17 +19,17 @@
     <div class=" container d-flex justify-content-end">
       <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" role="switch" name="darkmode" id="darkmode">
-        <label class="form-check-label ms-2" for="flexSwitchCheckDefault">다크모드</label>
+        <label class="form-check-label ms-2 label" for="flexSwitchCheckDefault">다크모드</label>
       </div>
     </div>
 
     <!-- 좌측 상단 가이드 제보 옵션 버튼 -->
     <div class='container d-flex justify-content-start'>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GuideModal" data-bs-whatever="@mdo">가이드</button>
+        <button type="button" class="btn btn-primary label" data-bs-toggle="modal" data-bs-target="#GuideModal" data-bs-whatever="@mdo">가이드</button>
         
-        <a class="btn btn-danger ms-2" href="https://forms.gle/YzGCJxmSvhmssZHdA" target="_blank"> 제보</a>
+        <a class="btn btn-danger ms-2 label" href="https://forms.gle/YzGCJxmSvhmssZHdA" target="_blank"> 제보</a>
         
-        <button type="button"  class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#OptionModal" >
+        <button type="button"  class="btn btn-outline-dark ms-2 label" data-bs-toggle="modal" data-bs-target="#OptionModal" >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
             <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
             <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
@@ -127,15 +128,15 @@
     <!-- 본 사이트 핵심 로직 -->
     <div class='d-flex justify-content-center'>
         <div class='flex-column  justify-content-center' style="text-align:center;">
-            <h1 id="title"> 커맨드 표를 이미지로 만드는 곳 </h1>
+            <h1 class="label"> 커맨드 표를 이미지로 만드는 곳 </h1>
             <div class="mb-3">
                 <p><textarea style="width: 500px; max-width: 100vw" rows="10" id="commandInput"></textarea></p>
-                <button type="button" class="btn btn-outline-dark" id="btnExcute">이미지로 변환 </button>
-                <button type="button" class="btn btn-outline-dark" id="downloadAll"> 일괄 다운로드 </button>
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasHistory" aria-controls="offcanvasExample" id="btnLoadRecent"> 최근 커맨드 로드 </button>
+                <button type="button" class="btn btn-outline-dark common-text" id="btnExcute">이미지로 변환 </button>
+                <button type="button" class="btn btn-outline-dark common-text" id="downloadAll"> 일괄 다운로드 </button>
+                <button type="button" class="btn btn-outline-dark common-text" data-bs-toggle="offcanvas" data-bs-target="#offcanvasHistory" aria-controls="offcanvasExample" id="btnLoadRecent"> 최근 커맨드 로드 </button>
             </div>
 
-            <div  class="h2 pb-3" style="border-bottom: 5px dashed darkgray; " id="resultTitleId" > 결과</div>
+            <div class="h2 py-3 label" style="border-bottom: 5px dashed darkgray; " id="resultTitleId" > 결과</div>
             <div id="resultList"></div>
         </div>
     </div>
