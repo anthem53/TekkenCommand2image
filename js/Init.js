@@ -26,8 +26,7 @@ let main = {
         const commandParaResult = processCommandPara();
         executeDraw(commandParaResult)
     }
-    , commandHistory : function (){
-        
+    , commandHistory : function (){        
     }
     
 
@@ -42,7 +41,6 @@ let view = {
         /* 리스트 계열로 늘어지는 html 요소를 파일로 분리 했는데 그걸 여기서 호출함.  */
         initHtml()
     }
-
 }
 
 /**
@@ -53,20 +51,17 @@ let option = {
         this.init_option()
         this.set_option()
     }
-    ,init_option : function (){
+    ,init_option : function () {
         optionInit()
     }
-    , set_option : function (){
-        
+    , set_option : function () {
         window.addEventListener("keyup", e => {
             if (option_is_live == true){
                 const commandParaResult = processCommandPara();
                 executeDraw(commandParaResult)
             }
-        });
-        
+        });        
     }
-
 }
 
 
@@ -76,7 +71,6 @@ let option = {
 let shortcut = {
     init : function (){
         this.setShortcut();
-
     }
     , setShortcut : function (){
         window.addEventListener("keydown" , (e)=> {
@@ -95,7 +89,6 @@ let shortcut = {
             }
         },false)
     }
-
 }
 
 

@@ -18,7 +18,6 @@ function optionInit(){
     isLiveOptionInit()
     initArrowColorOption()
     initDarkModeSwitch()
-
 }
 
 /**

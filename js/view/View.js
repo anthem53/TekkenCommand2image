@@ -39,7 +39,6 @@ async function setBodyContent (bodyId, filePath){
 }
 
 async function initHtml(){
-
     for (let bodyId in htmlTable ){
         let filepath = htmlTable[bodyId]
         setBodyContent(bodyId,filepath)
