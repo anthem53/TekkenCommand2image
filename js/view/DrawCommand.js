@@ -30,7 +30,7 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(resultElementHeader)
 
     let label = document.createElement('div')
-    label.className = "h3 border border border-3 border-dark rounded  mt-2 common-text"
+    label.className = "h3 border border border-3 border-dark rounded  mt-2 mb-3 common-text"
     label.style="text-align:center; background-color: white;"
     label.innerText = rawLine
     resultElement.appendChild(label)
@@ -39,10 +39,11 @@ function addResultElement(resultNum,title,rawLine){
 
     let resultContentCotainer = document.createElement('div')
     resultContentCotainer.className = "my-2"
+    resultContentCotainer.style = resultContentBackGroundColorStyleTable[getBackgroundColorKey()]
+    resultContentCotainer.id  = resultId
 
     let resultContent = document.createElement('span')
-    resultContent.id = resultId
-    resultContent.style="padding-top:13px;padding-bottom:18px"
+    // resultContent.style="padding-top:20px; padding-bottom:19px;"
     
 
     resultContentCotainer.appendChild(resultContent)
@@ -50,17 +51,16 @@ function addResultElement(resultNum,title,rawLine){
     resultElement.appendChild(resultContentCotainer)
 
     let downloadButton = document.createElement('button')
-    downloadButton.className= "btn btn-success mb-3"
+    downloadButton.className= "btn btn-success my-2"
     downloadButton.innerText = `다운로드 (${String(resultNum+1).padStart(2,"0")})`
     
     let downloadFunction = function(){
-
         html2canvas(document.getElementById(resultId),
             {
                 allowTaint: true,
                 logging: true,
                 useCORS:true,
-                backgroundColor:null,
+                backgroundColor:_commandBackGroudColorTable[getBackgroundColorKey()],
             })
             .then(canvas => {
 

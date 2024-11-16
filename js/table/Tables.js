@@ -258,3 +258,34 @@ const _elementColorTable = {
 function getBackgroundColorTable (){
     return _backgroundColorTable
 }
+
+const _commandBackGroudColorTable = {
+    "tranparent" : null , 
+    "normal" : "#FFFFFFCC",
+    "darkmode" : "#000000B3",
+}
+
+function getCommandBackGroudColorTable (){
+    return _commandBackGroudColorTable
+}
+
+const _resultContentBackGroundColorStyleTable = {
+    "tranparent" : "" , 
+    "normal" : "background-color:rgba(255,255,255,0.8); padding-top:10px; padding-bottom:9px;",
+    "darkmode" : "background-color:rgba(0,0,0,0.5); padding-top:10px; padding-bottom:9px;",
+}
+
+
+function getResultContentBackGroundColorStyleTable () {
+    return _resultContentBackGroundColorStyleTable
+}
+
+const _resultContentBorderColorClassTable = {
+    "tranparent" : "" , 
+    "normal" : "border border-4 border-dark",
+    "darkmode" : "border border-4 border-white",
+}
+
+function getResultContentBorderColorClassTable () {
+    return _resultContentBorderColorClassTable
+}

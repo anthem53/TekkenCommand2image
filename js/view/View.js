@@ -6,14 +6,30 @@
 const symbolStyleTable = getSymbolStyleTable()
 const arrowColorTable = getColorTable()
 const htmlTable = getHtmlTable()
+const resultContentBackGroundColorStyleTable = getResultContentBackGroundColorStyleTable()
+const commandBackGroudColorTable = getCommandBackGroudColorTable();
 
 
+/**
+ * view.js, color 정보를 통해서 body의 color 값을 결정함.
+ * @param {String} color 
+ */
 function setBodyColor(color){
     const body = document.getElementById('bodyId')
     body.style = "background-color : " + color
 }
 
-
+function getBackgroundColorKey(){
+    if (getIsBackground() == true)
+        if (getDarkModeSwitch() == true){
+            return "darkmode"
+        } else {
+            return "normal"
+        }
+    else {
+        return "tranparent"
+    }
+}
 async function getFileContent(filePath){
     let originPath = window.location.pathname
     let pathList = originPath.split("/")

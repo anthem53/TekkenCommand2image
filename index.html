@@ -48,38 +48,38 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="OptionModalBody">
-        <!-- 실시간 변환 기능 -->
+        <!-- 옵션 1 ~ 실시간 변환 기능 -->
         <h3 class="my-2"> 실시간 변환 </h3>
         <label>해당 기능 활성화시 입력창에 값이 변화하는걸 감지하여 실시간으로 결과를 만듦. (비활성화 추천) </label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="liveTranslate" id="disabledLive" value="false" checked>
+          <input class="form-check-input" type="radio" name="IsLive" id="disabledLive" value="false" checked>
           <label class="form-check-label" for="disabledLive">
             비활성화
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="liveTranslate" id="EnabledLive" value="true">
+          <input class="form-check-input" type="radio" name="IsLive" id="EnabledLive" value="true">
           <label class="form-check-label" for="EnabledLive">
             활성화
           </label>
         </div>
 
-        <!-- 방향키 이미지 색상 -->
-        <h3 class="mt-4"> 방향키 이미지 색상 </h3>
-        <label> 방향키 이미지의 색을 원하는 색으로 바꿈. </label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="arrowColor" value="white" checked>
-          <label class="form-check-label" for="disabledLive">
-            하얀색 (기본)
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="arrowColor" value="green">
-          <label class="form-check-label" for="EnabledLive">
-            녹색
-          </label>
-        </div>
 
+        <!-- 옵션 2 ~ 이미지 배경색 유무 설정 -->
+        <h3 class="mt-4"> 이미지 배경색 유무 </h3>
+        <label> 활성화시 다운로드 받는 이미지에 배경색이 추가됨. </label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="backgroundMode" value="false" id="disabledBackground" checked>
+          <label class="form-check-label" for="disabledBackground">
+            비활성화 (기본)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="backgroundMode" value="true" id="enabledBackground">
+          <label class="form-check-label" for="enabledBackground">
+            활성화
+          </label>
+        </div>
         <!-- 옵션 3 -->
 
       </div>
@@ -172,20 +172,21 @@
     <script src="./js/KeyCombinationTable.js" type="text/javascript"></script>
     <script src="./js/Encryption.js" type="text/javascript"></script>
 
+
+    <!-- 사이트에 사용되는 로직들 -->
+     
+    <script src="./js/cookie/Cookie.js" type="text/javascript"></script>
+    <script src="./js/cookie/HistoryCookie.js" type="text/javascript"></script>
+    <script src="./js/cookie/OptionCookie.js" type="text/javascript"></script>
+    <script src="./js/option/DarkmodeOption.js" type="text/javascript"></script>
+    <script src="./js/option/Option.js" type="text/javascript"></script>
+    
     <!-- view 만들어주는 라이브러리 -->
     <script src="./js/view/View.js" type="text/javascript"></script>  
     <script src="./js/view/DrawCommand.js" type="text/javascript"></script>
     <script src="./js/view/DrawHistoryView.js" type="text/javascript"></script>
 
-    
-    <!-- 사이트에 사용되는 로직들 -->
-    <script src="./js/option/Option.js" type="text/javascript"></script>
-    <script src="./js/cookie/Cookie.js" type="text/javascript"></script>
-    <script src="./js/cookie/HistoryCookie.js" type="text/javascript"></script>
-    <script src="./js/cookie/OptionCookie.js" type="text/javascript"></script>
-
     <script src="./js/KeyProcess.js" type="text/javascript"></script>
-    <script src="./js/option/DarkmodeOption.js" type="text/javascript"></script>
     <script src="./js/CommandProcess.js" type="text/javascript"></script>
     <script src="./js/test.js" type="text/javascript"></script>
     <script src="./js/Init.js" type="text/javascript"></script>

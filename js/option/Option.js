@@ -1,14 +1,12 @@
 const IS_LIVE_OPTION_COOKIE_NAME = "IsLive"
-const IS_LIVE_RADIO_NAME = "liveTranslate"
-const ARROW_COLOR = "arrowColor"
 const SYMBOL_COLOR = "symbolColor"
-
 const DARK_MODE = "darkmode"
+const IS_BACKGROUND = "backgroundMode"
 
 let option_is_live = false
-let option_arrow_color = "white"
 let option_symbol_color = "black"
 let option_isDarkMode= false
+let option_isBackground = false
 
 
 /**
@@ -16,8 +14,8 @@ let option_isDarkMode= false
  */
 function optionInit(){
     isLiveOptionInit()
-    initArrowColorOption()
     initDarkModeSwitch()
+    isBackgroundOptionInit()
 }
 
 /**
@@ -38,62 +36,6 @@ function getOptionInitValue(optionName, defaultValue){
 
 
 /**
- * 다크모드 스위치를 초기화 하는 함수
- */
-function initDarkModeSwitch(){
-    const darkmodeSwitch =  document.getElementById(DARK_MODE)
-    
-    darkmodeSwitch.addEventListener('click', e =>{
-        
-        option_isDarkMode = darkmodeSwitch.checked
-        setOptionCookie(DARK_MODE,option_isDarkMode.toString())
-        setDarkModeSwitch(option_isDarkMode)
-
-        // 다크모드로 바꾸고 나서 다시 변환하여 바뀐 옵션 적용하는 장면
-        const commandParaResult = processCommandPara();
-        executeDraw(commandParaResult)
-
-    })
-    
-    option_isDarkMode = JSON.parse(getOptionInitValue(DARK_MODE,false))
-    setDarkModeSwitch(option_isDarkMode)    
-    setOptionCookie(DARK_MODE,option_isDarkMode)
-
-}
-
-
-/**
- * @see 다크모드 스위치 값을 받음
- * @see checked 유무를 확인하여 결과값을 받음
- * @returns boolean
- */
-function getDarkModeSwitch(){
-    
-    const darkmodeSwitch =   document.getElementById(DARK_MODE)
-    return darkmodeSwitch.checked
-}
-
-/**
- * @see 다크모드 스위치 값을 받아
- * @param {boolean} value 
- */
-function setDarkModeSwitch(value){
-    
-    const darkmodeSwitch =  document.getElementById(DARK_MODE)
-    darkmodeSwitch.checked = value
-
-    if (value == true){
-        enableDarkmode()
-        option_symbol_color = "white"
-    }
-    else{ // value == false
-        disableDarkmode()
-        option_symbol_color = "black"
-    }
-
-}
-
-/**
  * @method 기호 색 반환/ black or white
  * @see view.js 에서 사용
  * @returns String
@@ -103,49 +45,14 @@ function getSymbolColor(){
 }
 
 
-/**
- * @method 1234n6789 에 해당하는 화살표 색상 옵션값 초기화
- * @see 
- */
-function initArrowColorOption(){
-    $('[type=radio][name="'+ARROW_COLOR+'"]').on('change', function (){
-        option_arrow_color = $(this).val()
-        setOptionCookie(ARROW_COLOR,option_arrow_color)
-        setArrowTable(getArrowTableTable()[option_arrow_color])
 
-        // 옵션 변환후 재 변환
-        const commandParaResult = processCommandPara();
-        executeDraw(commandParaResult)
-    })
-    option_arrow_color = getOptionInitValue(ARROW_COLOR,"white")
-    setArrowColor(option_arrow_color)
-    setOptionCookie(ARROW_COLOR,option_arrow_color)
-}
-
-/**
- * @see 화살표 색상 옵션 값 얻는 함수
- * @returns 
- */
-function getArrowColor(){
-    content = 'input[name="'+ARROW_COLOR+'"]:checked'
-    return document.querySelector(content).value
-}
-
-/**
- * @see 화살표 색상 옵션 값 설정하는 함수
- * @param {String} option_arrow_color 
- */
-function setArrowColor(option_arrow_color){
-    setArrowTable(getArrowTableTable()[option_arrow_color])
-    $('input[name='+ARROW_COLOR+']:input[value="'+option_arrow_color+'"]').attr("checked", true);	// 선택	
-}
 
 
 /**
  * 자동 변환 옵션 값 초기화 하는 함수
  */
 function isLiveOptionInit(){
-    $('[type=radio][name="liveTranslate"]').on('change', function (){
+    $('[type=radio][name="'+IS_LIVE_OPTION_COOKIE_NAME+'"]').on('change', function (){
         switch ($(this).val()) {
             case 'true':
               setOptionCookie(IS_LIVE_OPTION_COOKIE_NAME,"true")
@@ -177,15 +84,63 @@ function getIsLive(){
  * @param {boolean} optionValue 
  */
 function setIsLive(optionValue){
-    
     if (optionValue == true){
-        $('input[name=liveTranslate]:input[value="true"]').attr("checked", true);	// 선택	
+        $('input[name='+IS_LIVE_OPTION_COOKIE_NAME+']:input[value="true"]').attr("checked", true);	// 선택	
     }
     else{
-        $('input[name=liveTranslate]:input[value="false"]').attr("checked", true);	// 선택	
+        $('input[name='+IS_LIVE_OPTION_COOKIE_NAME+']:input[value="false"]').attr("checked", true);	// 선택	
     }
 
     option_is_live = optionValue
+}
 
+
+/**
+ * 
+ */
+function isBackgroundOptionInit(){
+    $('[type=radio][name="'+IS_BACKGROUND+'"]').on('change', function (){
+        switch ($(this).val()) {
+            case 'true':
+                setOptionCookie(IS_BACKGROUND,"true")
+                option_isBackground = true
+                break;
+            case 'false':
+                setOptionCookie(IS_BACKGROUND,"false")
+                option_isBackground = false
+              break;
+        }
+        // 배경유무 옵션 바꾸고 나서 다시 변환하여 바뀐 옵션 적용하는 장면
+        const commandParaResult = processCommandPara();
+        executeDraw(commandParaResult)
+    })
+
+    option_isBackground = getOptionInitValue(IS_BACKGROUND,'false') == "true"
+    setIsBackground(option_isBackground)
+    setOptionCookie(IS_BACKGROUND,option_isBackground.toString())
+}
+
+/**
+ * 배경색 ON/OFF 옵션 값 얻는 함수
+ */
+function getIsBackground(){
+    return option_isBackground
+}
+
+
+/**
+ * @see  배경색 ON/OFF 옵션 값 설정하는 함수
+ * @param {boolean} optionValue 
+ */
+function setIsBackground(optionValue){
+    
+    if (optionValue == true){
+        $('input[name='+IS_BACKGROUND+']:input[value="true"]').attr("checked", true);	// 선택	
+    }
+    else{
+        $('input[name='+IS_BACKGROUND+']:input[value="false"]').attr("checked", true);	// 선택	
+    }
+
+    option_isBackground = optionValue
 }
 
