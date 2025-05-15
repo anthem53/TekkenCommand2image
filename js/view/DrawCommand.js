@@ -80,7 +80,11 @@ function addResultElement(resultNum,title,rawLine){
     resultList.appendChild(resultElement)
     return [resultId, downloadFunction]
 }   
-
+/**
+ * @see 해당 라인의 커맨드를 그림.
+ * @param {*} curResultId 
+ * @param {*} curCommandLine 
+ */
 function drawImage(curResultId, curCommandLine){
     
     let result = document.getElementById(curResultId);
@@ -127,7 +131,17 @@ function drawImage(curResultId, curCommandLine){
         }
 
     }
+}
 
+function createEndElement(){
+    let resultList = document.getElementById('resultList');
+
+
+    // 하나의 커맨드 라인에 대한 결과가 들어갈 값.
+    let resultElement = document.createElement('a');
+    resultElement.name = "end";
+
+    resultList.appendChild(resultElement)
 }
 
 
@@ -150,8 +164,8 @@ function executeDraw(commmandParaResult){
         let [curResultId,curDownloadFunc] = addResultElement(i,curCommandLine,curRawLine)
         drawImage(curResultId, curCommandLine)
         downloadFuncList.push(curDownloadFunc)
-        
     }
+    createEndElement()
 
     let downloadAllBtn = document.getElementById('downloadAll');
     downloadAllBtn.onclick = function(){
