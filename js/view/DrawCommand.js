@@ -43,12 +43,17 @@ function addResultElement(resultNum,title,rawLine){
     resultContentCotainer.id  = resultId
 
     let resultContent = document.createElement('span')
+    resultContentCotainer.style='display: inline-block'
+    //resultContent.id = resultId
     // resultContent.style="padding-top:20px; padding-bottom:19px;"
     
 
     resultContentCotainer.appendChild(resultContent)
 
     resultElement.appendChild(resultContentCotainer)
+
+    let hiddenButton = document.createElement('div')
+    resultElement.appendChild(hiddenButton)
 
     let downloadButton = document.createElement('button')
     downloadButton.className= "btn btn-success my-2"

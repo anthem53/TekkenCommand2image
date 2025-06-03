@@ -61,7 +61,7 @@ function drawRecentCommandHistory(){
             historyRow.id= "historyRow_"+cookieNum
             historyRow.className= "d-flex flex-row mb-3"
 
-            // 좌측 숫자 넘버린ㅇ
+            // 좌측 숫자 넘버링
             let numberLabel = document.createElement("button")
             numberLabel.type= "button"
             numberLabel.className = "btn btn-primary me-2"
