@@ -125,10 +125,14 @@ function processWord (word){
         }
         else if (word[i] in symbolTable){
             plainTextList = pushPlainTextList(plainTextList,wordResult)
-
             wordResult.push([word[i],ElemType.SYMBOL])
             i += 1
-
+        }
+        else if (word[i] =="|"){
+            console.log("| is inputted")
+            plainTextList = pushPlainTextList(plainTextList,wordResult)
+            wordResult.push([word[i],ElemType.NEW_LINE])
+            i += 1
         }
         else if (word.slice(i,i+2) in buttonTable){
             plainTextList = pushPlainTextList(plainTextList,wordResult)

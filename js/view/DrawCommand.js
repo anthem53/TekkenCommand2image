@@ -109,6 +109,9 @@ function drawImage(curResultId, curCommandLine){
                 child.style="color:"+getSymbolColor()
                 child.innerText = content
                 
+            } else if (type == getElemType().NEW_LINE){
+                child = document.createElement('span');
+                child.innerHTML = '<br>'
             }
             else if (type == getElemType().ARROW) {
                 child = document.createElement('img');

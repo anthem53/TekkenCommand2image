@@ -108,7 +108,8 @@ const _ElemType = {
     FILE: "file" ,
     SYMBOL: "symbol",
     BLANK: "blank" ,
-    PLAIN: "plain"
+    PLAIN: "plain",
+    NEW_LINE:"new_line"
 }
 function getElemType(){
     return _ElemType
