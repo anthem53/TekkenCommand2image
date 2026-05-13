@@ -1,8 +1,5 @@
-const button2BitTable = getButton2BitTable()
-
-const bit2FileTable = getBit2FileTable()
-
-const keyCombinationTable = getKeyCombinationTable()
+import { bit2FileTable, button2BitTable } from "./table/Tables.js";
+import { keyCombinationTable } from "./table/KeyCombinationTable.js";
 
 /**
  * @see keyProcess.js
@@ -10,7 +7,7 @@ const keyCombinationTable = getKeyCombinationTable()
  * @param {String} command 
  * @returns 
  */
-function processButtonElement(command){
+export function processButtonElement(command){
     if (command in keyCombinationTable){
         return keyCombinationTable[command]
     }

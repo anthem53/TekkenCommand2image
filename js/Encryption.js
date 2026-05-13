@@ -4,7 +4,7 @@
  * @param {string} plain 
  * @returns 
  */
-function encode(plain) {
+export function encode(plain) {
 
     const bytes = new TextEncoder().encode(plain)
     const binString = String.fromCodePoint(...bytes);
@@ -17,7 +17,7 @@ function encode(plain) {
  * @param {string} base64 
  * @returns 
  */
-function decode(base64) {
+export function decode(base64) {
 
     try{
         const binString = atob(base64);

@@ -2,7 +2,7 @@
  * @see 방향키 이미지 주소가 담긴 테이블
  * @see commandProcess.js에서 사용
  */
-const _arrowTable = {
+export const arrowTable = {
     1:"images/w1.png",
     2:"images/w2.png",
     3:"images/w3.png",
@@ -19,7 +19,7 @@ const _arrowTable = {
  * @see 방향키 이미지 주소가 담긴 테이블
  * @see commandProcess.js에서 사용
  */
-const _greenArrowTable = {
+export const greenArrowTable = {
     1:"images/greenArrow/w1.png",
     2:"images/greenArrow/w2.png",
     3:"images/greenArrow/w3.png",
@@ -35,17 +35,9 @@ const _greenArrowTable = {
 /**
  * 색상을 동적으로 지정하기 위한 색상별 방향키 이미지 테이블을 색상과 매핑한 오브젝트
  */
-const _arrowTableTable = {
-    white : _arrowTable,
-    green : _greenArrowTable
-}
-
-/**
- * 색상이름으로 해당 색상 방향키 이미지 테이블을 가진 테이블들을 반환하는 함수
- * @returns 
- */
-function getArrowTableTable (){
-    return _arrowTableTable
+export const arrowTableTable = {
+    white : arrowTable,
+    green : greenArrowTable
 }
 
 /**
@@ -53,7 +45,7 @@ function getArrowTableTable (){
  * @see 검은 방향키는 해당 방향키를 꾹 누른다는 뜻.
  * @see commandProcess.js에서 사용
  */
-const _blackArrowTable = {
+export const blackArrowTable = {
     "1~":"images/b1.png",
     "2~":"images/b2.png",
     "3~":"images/b3.png",
@@ -67,23 +59,10 @@ const _blackArrowTable = {
 }
 
 /**
- * CommandProcess.js
- * @returns Object of 방향키 - 방향키 이미지 주소
- */
-function getArrowTable(){
-    return _arrowTable;
-}
-
-function getBlackArrowTable(){
-    return _blackArrowTable
-}
-
-
-/**
  * @see LPRPLKRK를 비트에 매핑함.
  * @see keyProcess.js에서 사용
  */
-const _button2BitTable = {
+export const button2BitTable = {
     "LP" : 8,
     "RP" : 4,
     "LK" : 2,
@@ -94,15 +73,10 @@ const _button2BitTable = {
     "AR" : 5
 }
 
-function getButton2BitTable () {
-    return _button2BitTable
-}
-
-
 /**
  * @see 커맨드 워드의 원소들의 ENUM TYPE
  */
-const _ElemType = {
+export const ElemType = {
     ARROW: "file_arrow" ,
     BUTTON: "file_button" ,
     FILE: "file" ,
@@ -111,15 +85,12 @@ const _ElemType = {
     PLAIN: "plain",
     NEW_LINE:"new_line"
 }
-function getElemType(){
-    return _ElemType
-}
 
 /**
  * @see keyProcess.js에서 사용
  * @see 비트값을 커맨드 이미지로 변환하는 테이블
  */
-const _bit2FileTable = {
+export const bit2FileTable = {
     8 : "images/c2.png", // 1000
     4 : "images/c3.png", // 0100
     2 : "images/c5.png", // 0010
@@ -137,11 +108,6 @@ const _bit2FileTable = {
     15: "images/c16.png",// 1111
 }
 
-function getBit2FileTable(){
-    return _bit2FileTable
-}
-
-
 /**
  * 심볼 테이블.
  * 원래 추가하는 방식이었는데 심볼마다 적용할 style이 달라져서 그냥 고정값으로 분리
@@ -150,15 +116,11 @@ function getBit2FileTable(){
  * _symbolStyleTable in Table.js
  * Symbol_Style in tekkenCommand.css 
  */
-let _symbolTable = {
+export let symbolTable = {
     '[':'[',
     ']':']',
     '~':'~',
     '▶':'▶'
-}
-
-function getSymbolTable(){
-    return _symbolTable
 }
 
 
@@ -166,15 +128,11 @@ function getSymbolTable(){
  * Symbol Style Table
  * 각 심볼 마다 다른 스타일을 적용하기 위함.
  */
-let _symbolStyleTable = {
+export let symbolStyleTable = {
     '[':' symbol_bracket ',
     ']':' symbol_bracket ',
     '~':' symbol_tilde ',
     '▶':' symbol_trangle mx-2'
-}
-
-function getSymbolStyleTable () {
-    return _symbolStyleTable
 }
 
 
@@ -184,16 +142,11 @@ function getSymbolStyleTable () {
  * https only
  * samesite에서만 사용가능이라 외부 사이트에서 해당 쿠키 활용 불가 
  */
-const _HISTORY_COOKIE_OPTION = {
+export const HISTORY_COOKIE_OPTION = {
     "expires" : 86400e3+Date.now(),
     "secure" : true,
     "SameSite" : "Strict",
     "path" : "/"
-}
-
-function getHistoryCookieOption (){
-
-    return _HISTORY_COOKIE_OPTION
 }
 
 /**
@@ -202,7 +155,7 @@ function getHistoryCookieOption (){
  * https only
  * samesite에서만 사용가능이라 외부 사이트에서 해당 쿠키 활용 불가 
  */
-const _OPTION_COOKIE_OPTION = {
+export const OPTION_COOKIE_OPTION = {
     "expires" : (86400e3*30) +Date.now(),
     "secure" : true,
     "SameSite" : "Strict",
@@ -210,30 +163,20 @@ const _OPTION_COOKIE_OPTION = {
 }
 
 
-function getOptionCookieOption (){
-
-    return _OPTION_COOKIE_OPTION
-}
-
-
 /**
  * Key는 내용을 담을 html 요소의 id
  * value는 내용이 담길 html 요소의 내용이 있는 file의 path
  */
-const _htmlTable = {
+export const htmlTable = {
     "GuideAccordion" : "/view/GuideContent.html"
     //,"OptionModalBody" : "/view.OptionContent.txt"
-}
-
-function getHtmlTable (){
-    return _htmlTable
 }
 
 
 /**
  * color css style filter value
  */
-const _colorTable = {
+export const colorTable = {
     pink : "invert(46%) sepia(100%) saturate(7493%) hue-rotate(296deg) brightness(117%) contrast(126%)",
     yellow : "invert(85%) sepia(78%) saturate(1115%) hue-rotate(357deg) brightness(111%) contrast(104%);",
     red : "invert(30%) sepia(92%) saturate(6802%) hue-rotate(354deg) brightness(96%) contrast(126%);",
@@ -242,51 +185,30 @@ const _colorTable = {
     green :"invert(67%) sepia(98%) saturate(3568%) hue-rotate(81deg) brightness(116%) contrast(125%);"
 }
 
-function getColorTable(){
-    return _colorTable
-}
-
-const _backgroundColorTable = {
+export const backgroundColorTable = {
     "normal" : "#F0F3BD",
     "darkmode" : "#A0A068"
 }
 
-const _elementColorTable = {
+export const elementColorTable = {
     "normal" : "#F0F3BD",
     "darkmode" : "#B0B179"
 }
 
-function getBackgroundColorTable (){
-    return _backgroundColorTable
-}
-
-const _commandBackGroudColorTable = {
+export const commandBackGroudColorTable = {
     "tranparent" : null , 
     "normal" : "#FFFFFFCC",
     "darkmode" : "#000000B3",
 }
 
-function getCommandBackGroudColorTable (){
-    return _commandBackGroudColorTable
-}
-
-const _resultContentBackGroundColorStyleTable = {
+export const resultContentBackGroundColorStyleTable = {
     "tranparent" : "" , 
     "normal" : "background-color:rgba(255,255,255,0.8); padding-top:10px; padding-bottom:9px;",
     "darkmode" : "background-color:rgba(0,0,0,0.5); padding-top:10px; padding-bottom:9px;",
 }
 
-
-function getResultContentBackGroundColorStyleTable () {
-    return _resultContentBackGroundColorStyleTable
-}
-
-const _resultContentBorderColorClassTable = {
+export const resultContentBorderColorClassTable = {
     "tranparent" : "" , 
     "normal" : "border border-4 border-dark",
     "darkmode" : "border border-4 border-white",
-}
-
-function getResultContentBorderColorClassTable () {
-    return _resultContentBorderColorClassTable
 }

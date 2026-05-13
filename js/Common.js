@@ -10,15 +10,15 @@ let debugOption = false;
  * 
  * @param {boolean} option 
  */
-function setDebug(option){
+export function setDebug(option){
     
     debugOption = option
 }
-function isDebug(){
+export function isDebug(){
     return debugOption
 }
 
-function print(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
+export function print(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
     try{
         console.log("FROM :"+ print.caller.name)
     }
@@ -32,7 +32,7 @@ function print(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
 
 }
 
-function prints(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
+export function prints(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
     let result = ""
 
     for (let i = 0 ; i < 9 ; i++){
@@ -53,7 +53,7 @@ function prints(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
 
 }
 
-function print2(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
+export function print2(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
     
     for (let i = 0 ; i < 9 ; i++){
         if (arguments[i] != undefined){
@@ -66,7 +66,7 @@ function print2(a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,w,x,y,z){
 
 }
 
-function printa(a){
+export function printa(a){
     print("===============",a,"===============")
 }
 

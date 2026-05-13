@@ -10,7 +10,9 @@
  * 이를 다시 \n으로 돌려주면서 넣어줌.
  * @param {*} contents 
  */
-function setCommandInputFromCookie(contents){
+import { decode, encode } from "../Encryption.js";
+
+export function setCommandInputFromCookie(contents){
     const commandInput = document.getElementById("commandInput")
     contents = contents.replaceAll("<br>","\n")    
     commandInput.value = contents;
@@ -28,7 +30,7 @@ function setCommandInputFromCookie(contents){
  * @param {string} value 
  * @param {Object} cookieOption 
  */
-function createCookie(name,value,cookieOption){
+export function createCookie(name,value,cookieOption){
         
     let cookieCotent = name +"=" + encode(value)
         +"; expires=" + new Date(cookieOption.expires)
@@ -46,7 +48,7 @@ function createCookie(name,value,cookieOption){
  * get raw cookie List that split with ';'
  * @returns cookie List that elem is [name, value]
  */
-function getCookieList(){
+export function getCookieList(){
     let cookieOrigin = document.cookie
     let result = []
 
@@ -75,7 +77,7 @@ function getCookieList(){
  * 쿠키 이름을 입력받으면 해당 쿠키를 제거함.
  * @param {String} cookieName 
  */
-function deleteCookieByName(cookieName){
+export function deleteCookieByName(cookieName){
     document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/"
 }
 

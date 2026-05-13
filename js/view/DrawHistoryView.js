@@ -2,7 +2,10 @@
  * 빈 히스토리 항목을 만듦.
  * @returns 
  */
-function getEmptyHistoryButton(){
+import { deleteCookieByName, setCommandInputFromCookie } from "../cookie/Cookie.js";
+import { getHistoryCookieList } from "../cookie/HistoryCookie.js";
+
+export function getEmptyHistoryButton(){
     let tempBtn = document.createElement("button")
     tempBtn.type= "button"
     tempBtn.className = "list-group-item list-group-item-action"
@@ -12,7 +15,7 @@ function getEmptyHistoryButton(){
     return tempBtn
 }
 
-function deleteHistoryCookieRow(cookieNum){
+export function deleteHistoryCookieRow(cookieNum){
     const targetRowId = "historyRow_"+cookieNum
     const targetElem = document.getElementById(targetRowId);
 
@@ -29,7 +32,7 @@ function deleteHistoryCookieRow(cookieNum){
  * 
  * return X
  */
-function drawRecentCommandHistory(){
+export function drawRecentCommandHistory(){
     // [result,oldestName,lastestNum]
 
     const cookieListInfo = getHistoryCookieList()
@@ -101,7 +104,7 @@ function drawRecentCommandHistory(){
     }
 }
 
-function eraseCurrentHistory(content){
+export function eraseCurrentHistory(content){
     const commandInput = document.getElementById("commandInput")
     const realValue = content.replaceAll("<br>","\n")
     if (realValue == commandInput.value){

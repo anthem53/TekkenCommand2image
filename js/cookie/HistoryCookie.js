@@ -1,12 +1,11 @@
 /* 히스토리 쿠키 최대 개수, 브라우저당 쿠키 최대 개수 제한이 있어 현재는 10개가 가장 괜찮은듯.*/
+import { HISTORY_COOKIE_OPTION } from "../table/Tables.js";
+import { createCookie, deleteCookieByName, getCookieList, setCommandInputFromCookie } from "./Cookie.js";
+
 const MAX_COOKIE_NUM = 10
 
 /* 히스토리 쿠키 이름 */
 const HISTORY_COOKIE_NAME = "RecentCommand"
-
-/* 히스토리 쿠키 옵션 정보. ex) secure, httponly 등 */
-const HISTORY_COOKIE_OPTION = getHistoryCookieOption()
-
 
 /**
  * @see HistoryCookie.js
@@ -16,7 +15,7 @@ const HISTORY_COOKIE_OPTION = getHistoryCookieOption()
  * lastestNum은 가장 최근 쿠키의 넘버링
  * cookiecount는 저장된 쿠키 개수
  */
-function getHistoryCookieList(){
+export function getHistoryCookieList(){
     let result = []
     let oldestName = undefined
     let lastestNum = 0
@@ -52,7 +51,7 @@ function getHistoryCookieList(){
  * @param {int} num 
  * @returns 
  */
-function getNextCookieNumber(num){
+export function getNextCookieNumber(num){
     return (num + 1) % MAX_COOKIE_NUM
 }
 
@@ -63,7 +62,7 @@ function getNextCookieNumber(num){
  * @returns [boolean, int]
  * @see return 의미는 [기존 쿠키에 존재하는지 유무, 해당 쿠키의 숫자]
  */
-function isCookieExist(newCookieValue){
+export function isCookieExist(newCookieValue){
     //[result,oldestName,lastestNum,count]
     let cookieListInfo = getHistoryCookieList();
     let cookieList = cookieListInfo[0]
@@ -71,7 +70,7 @@ function isCookieExist(newCookieValue){
     let lastestNum = cookieListInfo[2]
     let cookieCount = cookieListInfo[3]
     
-    for (var i = 0 ; i < cookieCount ; i++){
+    for (let i = 0 ; i < cookieCount ; i++){
         //result.push([name,cookieNum,value])
         let cookieElem = cookieList[i]
         const cookieName = cookieElem[0]
@@ -93,7 +92,7 @@ function isCookieExist(newCookieValue){
  * @param {Integer} Num 
  * @returns 
  */
-function setRecentCommandByNum(Num){
+export function setRecentCommandByNum(Num){
     // [result,oldestName,lastestNum]
     const cookieList= getHistoryCookieList()[0]
 
@@ -114,7 +113,7 @@ function setRecentCommandByNum(Num){
  * 쿠키 값 입력 받아서 다음 쿠키 이름 결정후 쿠키 생성.
  * @param {String} cookieValue 
  */
-function setHistoryCookie(cookieValue){
+export function setHistoryCookie(cookieValue){
     
     cookieValue = cookieValue.replaceAll("\n","<br>")
     const isExistResult = isCookieExist(cookieValue)

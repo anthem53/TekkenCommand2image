@@ -1,6 +1,7 @@
 
 /* 옵션 쿠키의 메타 정보 ex) secure httpOnly 등 */
-const OPTION_COOKIE_OPTION = getOptionCookieOption()
+import { OPTION_COOKIE_OPTION } from "../table/Tables.js";
+import { createCookie, deleteCookieByName, getCookieList } from "./Cookie.js";
 
 
 /**
@@ -8,7 +9,7 @@ const OPTION_COOKIE_OPTION = getOptionCookieOption()
  * @param {string} name 
  * @param {string} value 
  */
-function setOptionCookie(name,value){
+export function setOptionCookie(name,value){
     const oldCookie = findOptionCookieByName(name)
     if (oldCookie == ""){
         createCookie(name, value, OPTION_COOKIE_OPTION)
@@ -25,7 +26,7 @@ function setOptionCookie(name,value){
  * @returns string that cookie value 
  * @see if return value is "" then , there is no cookie that's name is option Name
  */
-function findOptionCookieByName(optionName){
+export function findOptionCookieByName(optionName){
     const cookieList = getCookieList()
 
     for (let i = 0 ; i < cookieList.length ; i++){

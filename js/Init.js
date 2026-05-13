@@ -1,99 +1,88 @@
-/**
- * 버튼 등 기본적인 기능 초기화
- */
-let main = {
-    init : function (){
+import { processCommandText } from "./CommandProcess.js";
+import { setHistoryCookie } from "./cookie/HistoryCookie.js";
+import { optionInit, getIsLive } from "./option/Option.js";
+import { initHtml } from "./view/View.js";
+import { executeDraw } from "./view/DrawCommand.js";
+import { drawRecentCommandHistory } from "./view/DrawHistoryView.js";
 
-
-        const _this = this
-        const btnExcute = document.getElementById("btnExcute");
-        btnExcute.onclick = _this.execute
-
-
-        const offcanvasHistory = document.getElementById("offcanvasHistory");
-        offcanvasHistory.addEventListener("show.bs.offcanvas", function (){
-            drawRecentCommandHistory()
-        })
-
-        offcanvasHistory.addEventListener("hidden.bs.offcanvas", function (){
-            const commandParaResult = processCommandPara();
-            executeDraw(commandParaResult)
-        })
-
-
-    } 
-    , execute : function (){
-        const commandParaResult = processCommandPara();
-        executeDraw(commandParaResult)
-    }
-    , commandHistory : function (){        
-    }
-    
-
+function getCommandInput(){
+    return document.getElementById("commandInput")
 }
 
+function renderCurrentCommand({ saveHistory = true } = {}){
+    const commandInput = getCommandInput()
+    const commandInputContent = commandInput.value
 
-/**
- * 뷰 관련 초기화
- */
-let view = {
-    init : async function (){
-        /* 리스트 계열로 늘어지는 html 요소를 파일로 분리 했는데 그걸 여기서 호출함.  */
-        initHtml()
+    if (saveHistory && commandInputContent.trim() != ""){
+        setHistoryCookie(commandInputContent)
     }
+
+    const commandParaResult = processCommandText(commandInputContent)
+    executeDraw(commandParaResult)
 }
 
-/**
- * 옵션 관련 초기화
- */
-let option = {
-    init : function (){
-        this.init_option()
-        this.set_option()
+function initTextareaResize(){
+    const textarea = getCommandInput()
+
+    function resize(){
+        const innerWidth = window.innerWidth
+        textarea.style.maxWidth = "100vw"
+        if (innerWidth >= 1034){
+            textarea.style.minWidth = "70vw"
+        }
     }
-    ,init_option : function () {
-        optionInit()
-    }
-    , set_option : function () {
-        window.addEventListener("keyup", e => {
-            if (option_is_live == true){
-                const commandParaResult = processCommandPara();
-                executeDraw(commandParaResult)
-            }
-        });        
-    }
+
+    resize()
+    window.addEventListener("resize", resize)
 }
 
+function initMainEvents(){
+    const btnExcute = document.getElementById("btnExcute")
+    btnExcute.onclick = () => renderCurrentCommand()
 
-/**
- * 단축키 관련 초기화 
- */
-let shortcut = {
-    init : function (){
-        this.setShortcut();
-    }
-    , setShortcut : function (){
-        window.addEventListener("keydown" , (e)=> {
-            if (e.ctrlKey && e.key == "e") {
-                e.preventDefault()
-                const commandParaResult = processCommandPara();
-                executeDraw(commandParaResult)
-            }
-            if (e.ctrlKey && e.key == "s") {
-                e.preventDefault()
-                document.getElementById("downloadAll").click();
-            }
-            if (e.ctrlKey && e.key == "h") {
-                e.preventDefault()
-                document.getElementById("btnLoadRecent").click();
-            }
-        },false)
-    }
+    const offcanvasHistory = document.getElementById("offcanvasHistory")
+    offcanvasHistory.addEventListener("show.bs.offcanvas", function (){
+        drawRecentCommandHistory()
+    })
+
+    offcanvasHistory.addEventListener("hidden.bs.offcanvas", function (){
+        renderCurrentCommand()
+    })
 }
 
+function initOptionEvents(){
+    optionInit({
+        onOptionChanged: () => renderCurrentCommand()
+    })
 
-main.init();
-view.init();
-option.init();
-shortcut.init();
+    window.addEventListener("keyup", () => {
+        if (getIsLive() == true){
+            renderCurrentCommand()
+        }
+    })
+}
 
+function initShortcutEvents(){
+    window.addEventListener("keydown" , (e)=> {
+        if (e.ctrlKey && e.key == "e") {
+            e.preventDefault()
+            renderCurrentCommand()
+        }
+        if (e.ctrlKey && e.key == "s") {
+            e.preventDefault()
+            document.getElementById("downloadAll").click()
+        }
+        if (e.ctrlKey && e.key == "h") {
+            e.preventDefault()
+            document.getElementById("btnLoadRecent").click()
+        }
+    },false)
+}
+
+export function initApp(){
+    initTextareaResize()
+    initMainEvents()
+    initHtml()
+    initOptionEvents()
+    initShortcutEvents()
+}

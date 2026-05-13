@@ -1,20 +1,21 @@
 
-const ElemType = getElemType()
+import {
+    arrowTable as defaultArrowTable,
+    blackArrowTable,
+    button2BitTable,
+    ElemType,
+    symbolTable
+} from "./table/Tables.js";
+import { processButtonElement } from "./KeyProcess.js";
 
-let arrowTable = getArrowTable()
-
-const blackArrowTable = getBlackArrowTable()
-
-const buttonTable = getButton2BitTable()
-
-const symbolTable = getSymbolTable()
+let arrowTable = defaultArrowTable
 
 
 /**
  * @see 색상별 arrowTable을 동적으로 지정하기 위한 함수
  * @param {object} _arrowTable 
  */
-function setArrowTable(_arrowTable){
+export function setArrowTable(_arrowTable){
     arrowTable = _arrowTable
 }
 
@@ -45,7 +46,7 @@ function pushPlainTextList(plainTextList , wordResult){
  * @param {*} para 
  * @returns 
  */
-function prepareCommandpara(para){
+export function prepareCommandpara(para){
     let commandInputContent = para
     commandInputContent = commandInputContent.toUpperCase();
 
@@ -62,7 +63,7 @@ function prepareCommandpara(para){
  * @param {*} word 
  * @returns 
  */
-function processWord (word){
+export function processWord (word){
     word = word.trim()
 
     let wordLen = word.length
@@ -134,10 +135,10 @@ function processWord (word){
             wordResult.push([word[i],ElemType.NEW_LINE])
             i += 1
         }
-        else if (word.slice(i,i+2) in buttonTable){
+        else if (word.slice(i,i+2) in button2BitTable){
             plainTextList = pushPlainTextList(plainTextList,wordResult)
 
-            buttons = word.slice(i,i+2).split("")
+            let buttons = word.slice(i,i+2).split("")
             i += 2
 
             while (i < wordLen){
@@ -153,8 +154,8 @@ function processWord (word){
                 }
             }
 
-            curButton = buttons.join("")
-            savetarget = processButtonElement(curButton)
+            const curButton = buttons.join("")
+            const savetarget = processButtonElement(curButton)
             wordResult.push([savetarget,ElemType.BUTTON])
 
         }
@@ -186,9 +187,9 @@ function processWord (word){
  * 
  * @param {String} line 
  */
-function processCommandLine(line){
+export function processCommandLine(line){
     
-    wordList = line.split('-')
+    const wordList = line.split('-')
     let lineResult = []
 
     let isFirst = true
@@ -211,14 +212,7 @@ function processCommandLine(line){
  * 코맨트 : 최종적으로 외부에선 얘 하나 호출하면 처리된 결과값을 받을 수 있음.
  * @returns list of [처리된 라인값, 원본]
  */
-function processCommandPara(){
-    const commandInput = document.getElementById("commandInput")
-    let commandInputContent = commandInput.value    
-
-    if (commandInputContent.trim() != ""){
-        setHistoryCookie(commandInputContent)
-    }
-
+export function processCommandText(commandInputContent){
     let commandLineList = prepareCommandpara(commandInputContent)
     let resultList = []
     for (const commandLineIndex in commandLineList){

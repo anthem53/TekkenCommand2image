@@ -1,7 +1,16 @@
 /**
  * 결과 창을 비움.
  */
-function clearAllImage(){
+import { ElemType } from "../table/Tables.js";
+import { getSymbolColor } from "../option/Option.js";
+import {
+    commandBackGroudColorTable,
+    getBackgroundColorKey,
+    resultContentBackGroundColorStyleTable,
+    symbolStyleTable
+} from "./View.js";
+
+export function clearAllImage(){
     let resultList = document.getElementById("resultList");
 
     while (resultList.firstChild) {
@@ -16,7 +25,7 @@ function clearAllImage(){
  * @param {*} title 
  * @returns 
  */
-function addResultElement(resultNum,title,rawLine){
+export function addResultElement(resultNum,title,rawLine){
     let resultId= 'result'+ String(resultNum);
     let resultList = document.getElementById('resultList');
 
@@ -60,12 +69,12 @@ function addResultElement(resultNum,title,rawLine){
     downloadButton.innerText = `다운로드 (${String(resultNum+1).padStart(2,"0")})`
     
     let downloadFunction = function(){
-        html2canvas(document.getElementById(resultId),
+        window.html2canvas(document.getElementById(resultId),
             {
                 allowTaint: true,
                 logging: true,
                 useCORS:true,
-                backgroundColor:_commandBackGroudColorTable[getBackgroundColorKey()],
+                backgroundColor:commandBackGroudColorTable[getBackgroundColorKey()],
             })
             .then(canvas => {
 
@@ -90,7 +99,7 @@ function addResultElement(resultNum,title,rawLine){
  * @param {*} curResultId 
  * @param {*} curCommandLine 
  */
-function drawImage(curResultId, curCommandLine){
+export function drawImage(curResultId, curCommandLine){
     
     let result = document.getElementById(curResultId);
     
@@ -103,32 +112,32 @@ function drawImage(curResultId, curCommandLine){
             const type = wordElem[1];
             
             let child = undefined    
-            if (type == getElemType().SYMBOL){
+            if (type == ElemType.SYMBOL){
                 child = document.createElement('span');
                 child.className = "symbol_base mx-1" + symbolStyleTable[content]
                 child.style="color:"+getSymbolColor()
                 child.innerText = content
                 
-            } else if (type == getElemType().NEW_LINE){
+            } else if (type == ElemType.NEW_LINE){
                 child = document.createElement('span');
                 child.innerHTML = '<br>'
             }
-            else if (type == getElemType().ARROW) {
+            else if (type == ElemType.ARROW) {
                 child = document.createElement('img');
                 child.crossorigin='anonymous'
                 child.src= content
             }
-            else if (type == getElemType().BUTTON){
+            else if (type == ElemType.BUTTON){
                 child = document.createElement('img');
                 child.crossorigin='anonymous'
                 child.src= content
             }
-            else if (type.includes(getElemType().FILE)){
+            else if (type.includes(ElemType.FILE)){
                 child = document.createElement('img');
                 child.crossorigin='anonymous'
                 child.src= content
             }
-            else if (type == getElemType().PLAIN){
+            else if (type == ElemType.PLAIN){
                 child = document.createElement('span');
                 child.className = "misc_button"
                 child.innerText = content
@@ -141,7 +150,7 @@ function drawImage(curResultId, curCommandLine){
     }
 }
 
-function createEndElement(){
+export function createEndElement(){
     let resultList = document.getElementById('resultList');
 
 
@@ -157,7 +166,7 @@ function createEndElement(){
  * @see 입력 커맨드를 처리한 결과와 다운로드 버튼을 생성함.
  * @param {*} commmandParaResult 
  */
-function executeDraw(commmandParaResult){
+export function executeDraw(commmandParaResult){
     clearAllImage()
     
     const len = commmandParaResult.length

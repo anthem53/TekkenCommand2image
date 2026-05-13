@@ -3,25 +3,31 @@
  * 만약 index.html에서 js 호출하는 순서가 잘못 될 경우 정상적인 동작을 하지 않을 수 있음.
  */
 
-const symbolStyleTable = getSymbolStyleTable()
-const arrowColorTable = getColorTable()
-const htmlTable = getHtmlTable()
-const resultContentBackGroundColorStyleTable = getResultContentBackGroundColorStyleTable()
-const commandBackGroudColorTable = getCommandBackGroudColorTable();
+import {
+    colorTable,
+    commandBackGroudColorTable,
+    htmlTable,
+    resultContentBackGroundColorStyleTable,
+    symbolStyleTable
+} from "../table/Tables.js";
+import { getIsBackground, getIsDarkMode } from "../option/Option.js";
+
+export { commandBackGroudColorTable, htmlTable, resultContentBackGroundColorStyleTable, symbolStyleTable };
+export const arrowColorTable = colorTable
 
 
 /**
  * view.js, color 정보를 통해서 body의 color 값을 결정함.
  * @param {String} color 
  */
-function setBodyColor(color){
+export function setBodyColor(color){
     const body = document.getElementById('bodyId')
     body.style = "background-color : " + color
 }
 
-function getBackgroundColorKey(){
+export function getBackgroundColorKey(){
     if (getIsBackground() == true)
-        if (getDarkModeSwitch() == true){
+        if (getIsDarkMode() == true){
             return "darkmode"
         } else {
             return "normal"
@@ -30,7 +36,7 @@ function getBackgroundColorKey(){
         return "tranparent"
     }
 }
-async function getFileContent(filePath){
+export async function getFileContent(filePath){
     let originPath = window.location.pathname
     let pathList = originPath.split("/")
     let rootPathList = pathList.slice(0,pathList.length-1)
@@ -46,7 +52,7 @@ async function getFileContent(filePath){
     .catch((e) => console.error(e));
 
 }
-async function setBodyContent (bodyId, filePath){
+export async function setBodyContent (bodyId, filePath){
     const content = await getFileContent(filePath)
 
     const body = document.getElementById(bodyId)
@@ -54,7 +60,7 @@ async function setBodyContent (bodyId, filePath){
 
 }
 
-async function initHtml(){
+export async function initHtml(){
     for (let bodyId in htmlTable ){
         let filepath = htmlTable[bodyId]
         setBodyContent(bodyId,filepath)

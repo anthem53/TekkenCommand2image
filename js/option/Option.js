@@ -1,7 +1,10 @@
-const IS_LIVE_OPTION_COOKIE_NAME = "IsLive"
-const SYMBOL_COLOR = "symbolColor"
-const DARK_MODE = "darkmode"
-const IS_BACKGROUND = "backgroundMode"
+import { findOptionCookieByName, setOptionCookie } from "../cookie/OptionCookie.js";
+import { initDarkModeSwitch } from "./DarkmodeOption.js";
+
+export const IS_LIVE_OPTION_COOKIE_NAME = "IsLive"
+export const SYMBOL_COLOR = "symbolColor"
+export const DARK_MODE = "darkmode"
+export const IS_BACKGROUND = "backgroundMode"
 
 let option_is_live = false
 let option_symbol_color = "black"
@@ -12,10 +15,10 @@ let option_isBackground = false
 /**
  * option 기능 초기화 하는 부분
  */
-function optionInit(){
+export function optionInit({ onOptionChanged = () => {} } = {}){
     isLiveOptionInit()
-    initDarkModeSwitch()
-    isBackgroundOptionInit()
+    initDarkModeSwitch({ onOptionChanged })
+    isBackgroundOptionInit({ onOptionChanged })
 }
 
 /**
@@ -24,7 +27,7 @@ function optionInit(){
  * @param {string} defaultValue 
  * @returns 
  */
-function getOptionInitValue(optionName, defaultValue){
+export function getOptionInitValue(optionName, defaultValue){
     const oldCookie =  findOptionCookieByName(optionName)
     if (oldCookie == ""){
         return defaultValue
@@ -40,8 +43,20 @@ function getOptionInitValue(optionName, defaultValue){
  * @see view.js 에서 사용
  * @returns String
  */
-function getSymbolColor(){
+export function getSymbolColor(){
     return option_symbol_color
+}
+
+export function setSymbolColor(color){
+    option_symbol_color = color
+}
+
+export function setIsDarkMode(optionValue){
+    option_isDarkMode = optionValue
+}
+
+export function getIsDarkMode(){
+    return option_isDarkMode
 }
 
 
@@ -74,7 +89,7 @@ function isLiveOptionInit(){
 /**
  * 자동 변환 옵션 값 얻는 함수
  */
-function getIsLive(){
+export function getIsLive(){
     return option_is_live
 }
 
@@ -83,7 +98,7 @@ function getIsLive(){
  * @see  자동 변환 옵션 값 설정하는 함수
  * @param {boolean} optionValue 
  */
-function setIsLive(optionValue){
+export function setIsLive(optionValue){
     if (optionValue == true){
         $('input[name='+IS_LIVE_OPTION_COOKIE_NAME+']:input[value="true"]').attr("checked", true);	// 선택	
     }
@@ -98,7 +113,7 @@ function setIsLive(optionValue){
 /**
  * 
  */
-function isBackgroundOptionInit(){
+function isBackgroundOptionInit({ onOptionChanged = () => {} } = {}){
     $('[type=radio][name="'+IS_BACKGROUND+'"]').on('change', function (){
         switch ($(this).val()) {
             case 'true':
@@ -111,8 +126,7 @@ function isBackgroundOptionInit(){
               break;
         }
         // 배경유무 옵션 바꾸고 나서 다시 변환하여 바뀐 옵션 적용하는 장면
-        const commandParaResult = processCommandPara();
-        executeDraw(commandParaResult)
+        onOptionChanged()
     })
 
     option_isBackground = getOptionInitValue(IS_BACKGROUND,'false') == "true"
@@ -123,7 +137,7 @@ function isBackgroundOptionInit(){
 /**
  * 배경색 ON/OFF 옵션 값 얻는 함수
  */
-function getIsBackground(){
+export function getIsBackground(){
     return option_isBackground
 }
 
@@ -132,7 +146,7 @@ function getIsBackground(){
  * @see  배경색 ON/OFF 옵션 값 설정하는 함수
  * @param {boolean} optionValue 
  */
-function setIsBackground(optionValue){
+export function setIsBackground(optionValue){
     
     if (optionValue == true){
         $('input[name='+IS_BACKGROUND+']:input[value="true"]').attr("checked", true);	// 선택	
